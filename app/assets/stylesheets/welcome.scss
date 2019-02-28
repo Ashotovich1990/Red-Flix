@@ -1,0 +1,70 @@
+.welcome-new {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.welcome-user {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+}
+
+.message-div {
+   display: inline;
+   flex-direction: row;
+   align-items: center;
+   justify-content: flex-end;
+}
+
+#message {
+    display: inline-block;
+    margin-right: 5px;
+    color: white;
+}
+
+#main-logo {
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 3%;
+    margin-right: auto;
+    color: #e50914;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.signout-button {
+    margin-right: 5vw;
+    margin-bottom: 0;
+    display: inline-block;
+    background-color: #e50914;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 7px 17px;
+    min-width: 100px;
+    max-width: 120px;
+    
+}
+
+.signin-button {
+    margin-right: 5vw;
+    margin-bottom: 0;
+    align-content: center;
+    display: inline-block;
+    background-color: #e50914;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 7px 17px;
+    width: 56px;
+    height: 20px;
+    
+}
+
+#message {
+    color: white;
+}
