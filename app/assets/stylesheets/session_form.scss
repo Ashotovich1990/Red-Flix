@@ -3,7 +3,7 @@ html {
    }
    
    body {
-       background-image: url("background-img.jpg");
+       background: black;
    }
    
    #session-title {
@@ -11,23 +11,38 @@ html {
        font-size: 200%;
    }
    
+   .splash-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-image: url("background-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(7, 7, 7, 0.8);
+    background-blend-mode: multiply;
+    z-index: -1;
+   }
+
    #session-form{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
      display: flex;
      align-items: center;
      justify-content: center;
    }
 
-   .session-form-container {
-    // display: flex;
-    // justify-content: center;
-   }
-   
    form { 
        background-color: rgba(0,0,0,.75);
        border-radius: 4px;
-       min-height: 515px;
-       padding: 60px 68px 40px;
-       margin-bottom: 90px;
+    //    min-height: 515px;
+       padding: 60px 68px 150px;
+    //    margin-bottom: 90px;
        width: 300px;
        color: gray;
     }
@@ -71,5 +86,61 @@ html {
 
     .form-link {
         color: white;
+    }
+
+    #errors {
+        color: red;
+    }
+     
+    .signup-offer {
+     color: white;
+     display: inline;
+     position: absolute;
+     margin-top: auto;
+     top: 40%;
+     margin-left: 10%;
+     margin-bottom: 16px;
+    
+
+     h1 {
+        margin-bottom: inherit;
+        font-size: 400%;
+        position: initial;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+    }
+
+     h3 {
+         margin-bottom: inherit;
+         font-size: 200%;
+         position:initial;
+         top: 0; left: 0;
+         width: 100%; height: 100%;
+     }
+
+    }
+    .offer-button  {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-bottom: inherit;
+        position: initial;
+        align-content: center;
+        text-align: center;
+        background-color: #e50914;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 16px;
+        padding: 7px 17px;
+        width: 400px;
+        min-height: 50px;
+    }
+
+    #signup-link {
+
+        color: white;
+        text-decoration: none;
+        font-size: 30px;   
     }
    

@@ -8,11 +8,13 @@ class SessionForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDemo = this.handleDemo.bind(this);
         this.content = this.content.bind(this);
+        this.errors = [];
+      
     }
 
     update(field) {
         return (e) => {
-            this.setState({ [field]: e.target.value})
+            this.setState({ [field]: e.target.value});
         }
     };
 
@@ -21,12 +23,18 @@ class SessionForm extends React.Component {
         this.props.processForm(this.state);
     }
 
+    componentWillUnmount() {
+        this.props.clearErrors();
+    }
+
     handleDemo (e) {
         e.preventDefault();
         this.props.login(this.props.demoUser);
     }
-    
+
     content() {
+       
+
         let link;
         if (this.props.formType === 'Sign In') {
             link = <Link className="form-link" to='/signup'>Sign Up</Link>;
@@ -59,6 +67,7 @@ class SessionForm extends React.Component {
              <label>
                 <input placeholder="Password" type="password" value={this.state.password} onChange={this.update("password")}/>
              </label>
+             <ul id="errors">{this.props.errors.map((err,idx) => <li key={idx}>{err}</li>)}</ul>
              <input type="submit" value={this.props.formType}/>
              <input id="demo-button" type="submit" value="DEMO" onClick={this.handleDemo}/>
             <p>{this.props.formOutInfo} {link}</p>
@@ -70,11 +79,9 @@ class SessionForm extends React.Component {
     }
 
     render() {
-        const errors = this.props.errors;
         const content = this.content();
         return (
-            <div>
-              {errors}
+            <div className = "splash-background">
               {content}
             </div>
         )
