@@ -16,13 +16,13 @@ Genre.create(name: "My List")
 Genre.create(name: "Trending Now")
 Genre.create(name: "New Releases")
 andrei = Movie.create(title: "Andrei Rublev", description: "Andrei Rublev is set against the background of 15th-century Russia. Although the film is only loosely based on the life of Andrei Rublev, it seeks to depict a realistic portrait of medieval Russia. Tarkovsky sought to create a film that shows the artist as a world-historic figure and Christianity as an axiom of Russia’s historical identity.", year: 1969, maturity_rating: "R")
-p 'hey'
-andrei_p = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/andrei-rublev.jpg')
-p 'end'
+# p 'hey'
+# andrei_p = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/andrei-rublev.jpg')
+# p 'end'
 
-andrei_v = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/Andrei+Rublev+.mp4')
-andrei.video.attach(io: andrei_v, filename: 'AndreiRublev.mp4')
-andrei.photo.attach(io: andrei_p, filename: 'AndreiRublev.jpg')
+# andrei_v = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/Andrei+Rublev+.mp4')
+# andrei.video.attach(io: andrei_v, filename: 'AndreiRublev.mp4')
+# andrei.photo.attach(io: andrei_p, filename: 'AndreiRublev.jpg')
 
 # Movie.create(title: "Stalker", description: "The film depicts an expedition led by a figure known as the 'Stalker' to take his two clients—a melancholic writer seeking inspiration, and a professor seeking scientific discovery—to a mysterious restricted site known simply as the 'Zone', where there supposedly exists a room which grants a person's innermost desires. The trio travel through unnerving areas filled with the debris of modern society while engaging in many arguments.", year: 1979, maturity_rating: "PG13")
 
