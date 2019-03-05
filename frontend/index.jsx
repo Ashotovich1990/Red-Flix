@@ -7,6 +7,7 @@ import * as MovieApiUtil from './actions/movies_actions'
 // import * as MovieApiUtil from './util/movies_api_util'
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    
     // test
     window.login = SessionApiUtil.login;
     window.signup = SessionApiUtil.signup;
@@ -14,6 +15,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     window.fetchGenres = MovieApiUtil.fetchGenres;
     window.fetchMovie = MovieApiUtil.fetchMovie;
     window.fetchGenre = MovieApiUtil.fetchGenre; 
+    window.addMovie = MovieApiUtil.addMovie;
+    window.removeMovie = MovieApiUtil.removeMovie;
     
     // test
     
@@ -28,8 +31,12 @@ document.addEventListener('DOMContentLoaded', ()=> {
             {
             [window.currentUser.id]: window.currentUser,
             demoId: {id: 7, username: "Guest", password: "password"},
+            },
+        genreNames: 
+            {
+                '0': 'My List'
             }
-        }
+        },
         });
     } else {
         store = configureStore(
@@ -46,5 +53,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     const root = document.getElementById('root');
-    ReactDOM.render(<Root store={store} />, root)
+    ReactDOM.render(<h1>hey</h1>, root)
+    console.log(document.getElementById("main-logo"));
+    document.getElementById("main-logo").click()
 })

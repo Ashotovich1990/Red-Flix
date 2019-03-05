@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import GenreNavContainer from './genre_nav_container';
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -14,20 +15,27 @@ class Welcome extends React.Component {
 
     render() {
       let content = this.props.currentUser ? 
-        (<div className="welcome-user">
+        (<div className="welcome-new">
+           <div className="nav-bar">
+             <h1 id="main-logo">RedFlix</h1> 
+             <GenreNavContainer genres={this.props.genres}/>
+           </div>
+         <div className="welcome-user">
            <h3 id="message">{this.props.currentUser.username}</h3>
            <button className="signout-button" onClick={this.handleClick}>Sign Out</button>
-         </div> ) : 
+         </div> 
+         </div> 
+         ) : 
         (<div >
+             <div className="welcome-new">
+             <h1 id="main-logo">RedFlix</h1> 
              <Link to="/login" className="signin-button"><p id="signin">Sign In</p></Link>
+         </div>
          </div>);
        
-       return (
+       return content;
 
-       <div className="welcome-new">
-       <h1 id="main-logo">RedFlix</h1> 
-         {content}
-       </div> );
+    
     }
 }
 

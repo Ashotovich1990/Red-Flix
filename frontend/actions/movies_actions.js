@@ -2,6 +2,8 @@ import * as MovieApiUtil from '../util/movies_api_util'
 
 export const RECEIVE_MOVIES = "RECEIVE_MOVIES";
 export const RECEIVE_MOVIE = "RECEIVE_MOVIE";
+export const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
+export const REMOVE_MOVIE = "REMOVE_MOVIE";
 
 const receiveMovies = payload => {
     return (
@@ -16,6 +18,16 @@ const receiveMovie = movie => ({
     movie,
 })
 
+const addToWatchlist = movie => ({
+    type: ADD_TO_WATCHLIST,
+    movie,
+})
+
+const deleteMovie = movieId => ({
+    type: REMOVE_MOVIE,
+    movieId,
+});
+
 export const fetchGenres = () => dispatch => (
     MovieApiUtil.fetchGenres()
     .then(res => dispatch(receiveMovies(res)))
@@ -29,4 +41,14 @@ export const fetchGenre = (genreId) => dispatch => (
 export const fetchMovie = movieId => dispatch => (
     MovieApiUtil.fetchMovie(movieId)
     .then(res => dispatch(receiveMovie(res)))
+)
+
+export const addMovie = movieId => dispatch => (
+    MovieApiUtil.addMovie(movieId)
+    .then(res => dispatch(addToWatchlist(res)))
+)
+
+export const removeMovie = movieId => dispatch => (
+    MovieApiUtil.removeMovie(movieId)
+    .then(res => dispatch(deleteMovie(movieId)))
 )

@@ -8,7 +8,7 @@ const genreNamesReducer = (oldState ={}, action) => {
     let newState;
     switch (action.type) {
         case RECEIVE_MOVIES:
-          newState = merge({},action.payload.genreNames)
+          newState = merge({},oldState,action.payload.genreNames)
           return newState;
         default:
           return oldState;

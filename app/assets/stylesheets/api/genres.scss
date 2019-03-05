@@ -6,9 +6,12 @@
     margin-top: 5%;
     margin-left: 3%;
     color: white;
+    max-width: 100%;
 
-    h1 {
+    #link-to-new-page {
         font-size: 20px;
+        color: white;
+        text-decoration: none;
     }
 }
 
@@ -19,18 +22,113 @@ img {
 
 .genre {
     margin-top: 40px;
-    min-width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    display: flex;
     
+    .movie-dropbar {
+       background-color: rgba(7, 7, 7, 0.8); 
+       width: 90%;
+       height: 600px;
+       margin-top: 5%;
+       display: flex;
+       flex-direction: column;
+       border: 3px solid gray;
+       border-radius: 1px;
+       display: flex;
+       justify-content: space-between;
+       flex-direction: row;
+
+       .dropbar-info-container {
+          display: inherit;
+          flex-direction: column;
+       }
+
+       .dropbar-poster-container {
+          flex-direction: column;
+       }
+
+       #movie-dropbar-description {
+           padding: 10%;
+           font-size: larger;
+           display: inline-flex;
+           top: 15%;
+           color: white;
+           z-index: 4;
+       }
+
+       #movie-dropbar-title {
+            padding: 10%;
+            font-size: xx-large;
+            display: inline-flex;;
+            // top: 5%;
+            color: white;
+            // z-index: 5;
+       }
+
+       #dropdown-close {
+           color: gray;
+           font: 900;
+           font-size: 40px;
+           position: relative;
+           top: -580px;
+           left: 390px;
+           z-index: 3;
+       }
+
+       #dropdown-poster {
+        height: 600px;
+        width: 450px;
+        z-index: -1;
+       }
+
+       .dropdown-buttons {
+        display: flex;
+        margin-top: auto;
+        margin-bottom: 20%;
+        margin-left: 10%;
+        margin-right: 50px;
+        justify-content: space-between;
+        z-index: 5;
+        
+       }
+
+       #add-movie-button, #remove-movie-button {
+           text-align: center;
+           padding-top: 10px;
+           font-size: 20px;
+           width: 150px;
+           height: 30px;
+           background: red;
+           border-radius: 3px;
+           
+       }
+
+
+    }
+    
+}
+
+.genre-movie-play {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -10000;
+    margin-bottom: 5px;
 }
 
 .genre-list {
     margin-top: 15px; 
     display: flex;
+    max-width: 100%;
 
     &:hover {
         .li {
             transform:
         translateX(-25%);
+        z-index: 5;
+        position: relative;
         }
     }
     
@@ -53,32 +151,108 @@ img {
         }
     }
 
+    .movie-list-item-content:hover > #movie-title, #movie-year, #movie-rating, .movie-dropbar {
+        transform: none;
+    }
+
 }
 
 
 .movie-list-item-content {
-   
-   padding-top: 50%;
-   padding-left: 10%;
-   font-weight: 900;
+   font-weight: 700;
+   font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
    background-color: rgba(7, 7, 7, 0.8);
-   height: 180px;
-  
-   
+   height: 280px;
+   position: relative;
+     
    #movie-title {
+       margin-top: 40%;
+       margin-left: 10%;
+       margin-right: 10%;
+       font-size: 20px;
        color: blue($color: white);
+   }
+   
+   .movie-item-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
    }
 
    #movie-year {
+       font-weight: 500;
+       margin-right: 20px;
        margin-top: 10px;
        color: blue($color: white);
        
    }
 
-   #movie-rating {
+   #maturity-rating-PG13 {
+       margin-left: 20px;
+       margin-top: 20px;
+       display: inline-block;
+       flex-direction: row;
        margin-top: 10px;
        color: #1e7040;
+       border: 2px solid  #1db35b;
+       border-radius: 2px;
+    }
 
+   #maturity-rating-R {
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    flex-direction: row;
+    margin-top: 10px;
+    color: #f60404;
+    border: 1px solid #ad0b0b;
+    border-radius: 2px;
+    }
+
+    #maturity-rating-NC-17 {
+        margin-left: 20px;
+        margin-top: 20px;
+        display: inline-block;
+        flex-direction: row;
+        margin-top: 10px;
+        color: #ad540b;
+        border: 1px solid #ce620a;
+        border-radius: 2px;
+        }
+
+    #open-dropdown-movie {
+        position: relative;
+        font-size: 200%;
+        margin-left: 45%;
+        margin-top: 20%;
+        margin-bottom: 5%;
+        
+    }
+}
+
+.genre-browse {
+    display: flex;
+    flex-direction: row;
+   #brows-icon {
+       font-size: 80%;
+       margin-left: 10px;
+       margin-top: auto;
    }
 }
+
+.my-list-empty {
+    display: flex;
+    flex-direction: row;
+   #my-list-message {
+       display: inline-block;
+       font-size: 100%;
+       margin-left: auto;
+       margin-right: 50%;
+       margin-top: 20%;
+   }
+}
+
+
 

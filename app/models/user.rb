@@ -6,6 +6,15 @@ class User < ApplicationRecord
 
     attr_reader :password
 
+    has_many :watchlist_items,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :UserWatchlist
+
+    has_many :movies,
+    through: :watchlist_items,
+    source: :movie 
+    
     def password=(password)
         @password = password
         self.password_digest = BCrypt::Password.create(password)
@@ -35,4 +44,5 @@ class User < ApplicationRecord
             return nil 
         end
     end
+
 end

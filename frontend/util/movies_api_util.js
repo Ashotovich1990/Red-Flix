@@ -24,3 +24,25 @@ export const fetchMovie = MovieId => {
         })
     )
 };
+
+export const addMovie = MovieId => {
+    return (
+        $.ajax({
+            url: `/api/movies`,
+            method: 'POST',
+            data: {
+                movie: {id: MovieId}
+            }
+        })
+    )
+}
+
+export const removeMovie = movieId => {
+    return (
+        $.ajax({
+            url: `/api/movies/${movieId}`,
+            method: 'DELETE',
+        })
+    )
+}
+

@@ -1,15 +1,41 @@
 .welcome-new {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 .welcome-user {
     display: flex;
-    width: 300px;
+    width: auto;
     justify-content: flex-end;
 }
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.genre-nav-bar {
+    display: flex;
+    // flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    min-width: 450px;
+    margin-right: 5px;
+    
+    a {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        font-size: 100%;
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+}
+
 
 .message-div {
    display: inline;
@@ -30,7 +56,6 @@
     display: inline-block;
     margin-top: 2%;
     margin-left: 3%;
-    margin-right: auto;
     color: #e50914;
     font-weight: 900;
     font-size: 50px;
