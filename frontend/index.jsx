@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     const root = document.getElementById('root');
-    ReactDOM.render(<h1>hey</h1>, root)
+    ReactDOM.render(<Root store={store} />, root)
     console.log(document.getElementById("main-logo"));
     document.getElementById("main-logo").click()
 })
