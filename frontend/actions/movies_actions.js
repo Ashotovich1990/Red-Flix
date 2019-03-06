@@ -1,4 +1,5 @@
 import * as MovieApiUtil from '../util/movies_api_util'
+import {receiveMainMovie} from './display_actions';
 
 export const RECEIVE_MOVIES = "RECEIVE_MOVIES";
 export const RECEIVE_MOVIE = "RECEIVE_MOVIE";
@@ -6,6 +7,7 @@ export const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 export const REMOVE_MOVIE = "REMOVE_MOVIE";
 
 const receiveMovies = payload => {
+   
     return (
     {
     type: RECEIVE_MOVIES,
@@ -36,6 +38,7 @@ export const fetchGenres = () => dispatch => (
 export const fetchGenre = (genreId) => dispatch => (
     MovieApiUtil.fetchGenre(genreId)
     .then(res => dispatch(receiveMovies(res)))
+    .then(res => res.payload.movies ? dispatch(receiveMainMovie(res.payload.movies['2'].id)) : null)
 )
 
 export const fetchMovie = movieId => dispatch => (

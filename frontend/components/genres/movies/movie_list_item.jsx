@@ -1,9 +1,11 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 // import MovieDropbarContainer from './movie_list_dropbar_container';
 
 class MovieListItem extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {redirect: false}
         this.style = {
             width: '200px',
             height: "280px",
@@ -13,6 +15,8 @@ class MovieListItem extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.scrollToItem = this.scrollToItem.bind(this);
+        this.handlePlay = this.handlePlay.bind(this)
+  
     }
     
     scrollToItem() {
@@ -24,9 +28,15 @@ class MovieListItem extends React.Component {
         this.props.receiveDropDownMovie(this.props.content.id, this.props.genreId);
         
     }
+
+    handlePlay() {
+        this.setState({redirect: true})
+    }
     
     render() {
-        if (this.props.hovered === this.props.content.id) {
+        if (this.state.redirect) {
+          return <Redirect to={`/browse/watch/${this.props.content.id}`}/>
+        } else if (true) {
         return  (
         <div>
             <div style={this.style}>
@@ -35,6 +45,7 @@ class MovieListItem extends React.Component {
                   <div id={`maturity-rating-${this.props.content.maturity_rating}`}>{this.props.content.maturity_rating}</div>
                   <div id="movie-year">{this.props.content.year}</div>
                 </div>
+                <div onClick={this.handlePlay} id='open-movie-page'><i className="far fa-play-circle"></i></div>
                 <div  id="movie-title">{this.props.content.title}</div>
                 <div id="open-dropdown-movie" onClick={this.handleClick}><i className="fas fa-angle-double-down"></i></div>
               </div>

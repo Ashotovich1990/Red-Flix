@@ -3,7 +3,7 @@ import React from 'react';
 class GenreMoviePlay extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { video: null, muted: true}
+        this.state = { movie: null, muted: true}
         this.handleSoundOn = this.handleSoundOn.bind(this)
         this.handleSoundOff = this.handleSoundOff.bind(this)
     }
@@ -20,18 +20,19 @@ class GenreMoviePlay extends React.Component {
      
 
     componentDidMount() {
-        this.props.fetchMovie(this.props.genreMovieId).then(() => document.getElementById("main-logo").click())
+        this.props.fetchMovie(this.props.movieId).then(() => this.setState({movie: this.props.movies[this.props.movieId]}))
     }
 
     render() {
-        if (this.props.movies[this.props.genreMovieId]) {
+        if (this.state.movie && this.props.genreId !== '0') {
+        
         return (
             <div
             onMouseEnter={this.handleSoundOn} 
             onMouseLeave={this.handleSoundOff}
                 >
-                <video className="genre-movie-play" autoPlay={true} muted={this.state.muted} loop={true}>
-                <source src={this.props.movies[this.props.genreMovieId].video} type="video/mp4"/>
+                <video className="genre-movie-play" autoPlay={true} muted={this.state.muted} loop={true} >
+                <source src={this.state.movie.video} type="video/mp4"/>
             
                 Your browser does not support the video tag.
             </video>

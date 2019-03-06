@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {fetchMovie} from '../../../actions/movies_actions'
 
 const mSP = (state) => ({
+    movieId: state.mainMovie,
     movies: state.entities.movies,
 })
 

@@ -14,7 +14,7 @@ class MoviePlay extends React.Component {
      if (this.props.movies[this.props.movieId || this.props.genreMovieId]) {
     return (
         <div>
-            <video className="genre-movie-play" controls>
+            <video className="movie-list-movie-play" controls>
             <source src={this.props.movies[this.props.movieId || this.props.genreMovieId].video} type="video/mp4"/>
           
             Your browser does not support the video tag.
