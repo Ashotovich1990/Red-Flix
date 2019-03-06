@@ -36,7 +36,7 @@ class MovieListItem extends React.Component {
     render() {
         if (this.state.redirect) {
           return <Redirect to={`/browse/watch/${this.props.content.id}`}/>
-        } else if (true) {
+        } else if (this.props.hovered === this.props.content.id) {
         return  (
         <div>
             <div style={this.style}>
