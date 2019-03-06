@@ -18,7 +18,8 @@
       end
          
     end
-  
+    
+    json.movieIds @movie_ids
     
     json.genreLists @genre_lists
 

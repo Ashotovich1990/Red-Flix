@@ -35,11 +35,12 @@ export const fetchGenres = () => dispatch => (
     .then(res => dispatch(receiveMovies(res)))
 )
 
-export const fetchGenre = (genreId) => dispatch => (
+export const fetchGenre = (genreId) => dispatch => {
+
     MovieApiUtil.fetchGenre(genreId)
     .then(res => dispatch(receiveMovies(res)))
-    .then(res => res.payload.movies ? dispatch(receiveMainMovie(res.payload.movies['2'].id)) : null)
-)
+    .then(res => res.payload.movies ? dispatch(receiveMainMovie(res.payload.movieIds[Math.floor(Math.random()*res.payload.movieIds.length)])) : null)
+}
 
 export const fetchMovie = movieId => dispatch => (
     MovieApiUtil.fetchMovie(movieId)

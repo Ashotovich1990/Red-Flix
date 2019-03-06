@@ -32,10 +32,11 @@ class Api::GenresController < ApplicationController
         @genre_lists = Hash.new
         @genre_names = Hash.new
         @my_watchlist = Hash.new
+        
+        @movie_ids = @movies.map {|el| el.id}
         if @movies
-          movie_ids = @movies.map {|el| el.id}
         # @sample = Genre.joins(:movie_lists).where(movie_lists: { movie_id: movie_ids})
-          @sample = MovieList.includes(:genre).where( movie_id: movie_ids)
+          @sample = MovieList.includes(:genre).where( movie_id: @movie_ids)
           @sample.each do |movie_list|
             @genre_names[movie_list.genre.id] = movie_list.genre.name
             @genre_lists[movie_list.genre.id] ||= []
