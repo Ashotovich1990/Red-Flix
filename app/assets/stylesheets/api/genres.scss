@@ -10,6 +10,7 @@
 
     #link-to-new-page {
         font-size: 20px;
+        margin-left: 1%;
         color: white;
         text-decoration: none;
     }
@@ -137,6 +138,7 @@ img {
     margin-top: 15px; 
     display: flex;
     max-width: 100%;
+    margin-left: 1%;
 
     &:hover {
         .li {
@@ -172,11 +174,18 @@ img {
 
 }
 
-.move-arrow-left {
-
+#move-arrow-left {
+   position: relative;
+   top: -160px;
+   left: -17px;
+   font-size: xx-large;
 }
 
-.move-arrow-right {
+#move-arrow-right {
+    position: relative;
+    top: -200px;
+    right: -1260px;
+    font-size: xx-large;
     
 }
 

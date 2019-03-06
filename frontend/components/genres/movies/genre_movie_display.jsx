@@ -44,7 +44,7 @@ class GenreMoviePlay extends React.Component {
             onMouseEnter={this.handleSoundOn} 
             onMouseLeave={this.handleSoundOff}
                 >
-                <video className="genre-movie-play" autoPlay={true} muted={this.state.muted} loop={true} >
+                <video key={this.state.movie.id} className="genre-movie-play" autoPlay={true} muted={this.state.muted} loop={true} >
                 <source src={this.state.movie.video} type="video/mp4"/>
             
                 Your browser does not support the video tag.
