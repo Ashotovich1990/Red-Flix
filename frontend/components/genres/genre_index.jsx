@@ -28,7 +28,7 @@ class GenreIndex extends React.Component {
     }
 
     componentDidUpdate() {
-       this.props.receiveDropDownMovie(null, null);
+    //    this.props.receiveDropDownMovie(null, null);
     }
 
     componentWillUnmount() {

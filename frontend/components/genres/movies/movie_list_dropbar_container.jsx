@@ -4,6 +4,7 @@ import {receiveDropDownMovie} from '../../../actions/display_actions';
 
 const mSP = state => ({
     movies: state.entities.movies,
+    myList: state.entities.myList,
     dropDownMovie: state.dropDownMovie,
 })
 
