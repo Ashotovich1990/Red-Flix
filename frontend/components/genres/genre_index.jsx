@@ -1,5 +1,6 @@
 import React from 'react';
 import GenreIndexItem from './genre_index_item';
+import MyListContainer from './my_list_container'
 import GenreMovieDisplayContainer from './movies/genre_movie_display_container';
 
 class GenreIndex extends React.Component {
@@ -51,6 +52,7 @@ class GenreIndex extends React.Component {
     // }
 
     render() {
+
         let genreNames
         let genreMain =<div></div>;
         if (!this.props.genreId) {
@@ -67,12 +69,15 @@ class GenreIndex extends React.Component {
                 />
                 )
             )
+        } else if (this.props.genreId === '0') {
+            return <MyListContainer />
         } else {
+            //   commented thi sout of line 73 to remove my list from other genres key === '0' ||
                 genreMain = Object.keys(this.props.genreLists).map((key) => {
-                if (key === '0' || key === this.props.genreId) {
+                if (key === this.props.genreId) {
                     return (
                 <GenreIndexItem
-                    key={key} 
+                    key={-key} 
                     fetchGenre ={this.props.fetchGenre}
                     genreUrl = {this.props.genreId}
                     genreLists = {this.props.genreLists}

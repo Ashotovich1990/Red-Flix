@@ -3,14 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .genre-container {
-    margin-top: 5%;
-    margin-left: 3%;
+    margin-top: 40%;
+    padding-left: 2%;
     color: white;
     max-width: 100%;
+    overflow: hidden;
 
     #link-to-new-page {
         font-size: 20px;
-        margin-left: 1%;
+        margin-left: 2%;
         color: white;
         text-decoration: none;
     }
@@ -21,9 +22,27 @@ img {
     height: 280px;
 }
 
+.my-list-container {
+    padding-left: 3%;
+    padding-bottom: 3%;
+    color: white;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: 5%;
+
+    #my-list-title {
+       padding-left: 3%; 
+       position: relative;
+       top: -41px;
+       font-size: -webkit-xxx-large;
+    }
+}
+
 .my-list {
-    position: absolute;
-    top: 25%;
+    margin-top: 10%;
+    /* height: 200%; */
+    /* overflow: hidden; */
+    width: 100%;
 }
 
 .genre {
@@ -31,6 +50,7 @@ img {
     max-width: 100%;
     flex-direction: column;
     display: flex;
+}
     
     .movie-dropbar {
        background-color: rgba(7, 7, 7, 0.8); 
@@ -112,7 +132,7 @@ img {
 
     }
     
-}
+
 
 .genre-movie-play {
     position: absolute;
@@ -138,7 +158,7 @@ img {
     margin-top: 15px; 
     display: flex;
     max-width: 100%;
-    margin-left: 1%;
+    margin-left: 2%;
 
     &:hover {
         .li {
@@ -174,16 +194,18 @@ img {
 
 }
 
-#move-arrow-left {
+.move-arrow-left {
+   display: block;
    position: relative;
-   top: -160px;
-   left: -17px;
+   top: 160px;
+   left: -1px;
    font-size: xx-large;
 }
 
-#move-arrow-right {
+.move-arrow-right {
+    display: block;
     position: relative;
-    top: -200px;
+    top: -160px;
     right: -1260px;
     font-size: xx-large;
     
@@ -288,13 +310,9 @@ img {
 .my-list-empty {
     display: flex;
     flex-direction: row;
-   #my-list-message {
-       display: inline-block;
-       font-size: 100%;
-       margin-left: auto;
-       margin-right: 50%;
-       margin-top: -25%;
-   }
+    color: white;
+    justify-content: space-around;
+    margin-top: 25%;
 }
 
 

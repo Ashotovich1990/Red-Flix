@@ -72,14 +72,15 @@ class GenreIndexItem extends React.Component {
             onMouseEnter={this.onMouseEnterBrowse}
             onMouseLeave={this.onMouseLeaveBrowse}
             to={`/browse/${this.props.genreId}`}><div className="genre-browse">{this.props.genreName} <div id="brows-icon">{this.state.browse}</div></div></Link>
+          <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div>
           <ul className='genre-list'>
             {this.props.movies.slice(this.state.start,this.state.end).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}
             ><MovieListItemContainer genreId={this.props.genreId} hovered={this.state.hovered} content={movie}/></li>))}
           </ul>
-          <div onClick={this.handleScrollLeft} id='move-arrow-left'><i class="fas fa-arrow-left"></i></div>
-          <div onClick={this.handleScrollRight} id='move-arrow-right'><i class="fas fa-arrow-right"></i></div>
+          {/* <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div> */}
+          <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div>
           <MovieDropbarContainer genreId={this.props.genreId}/>
       </div>
     );
