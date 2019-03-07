@@ -2,11 +2,18 @@ import {connect} from 'react-redux';
 import MovieListDropbar from './movie_list_dropbar'; 
 import {receiveDropDownMovie} from '../../../actions/display_actions';
 
-const mSP = state => ({
-    movies: state.entities.movies,
-    myList: state.entities.myList,
-    dropDownMovie: state.dropDownMovie,
-})
+const mSP = state => {
+    const dropDownMovie = state.dropDownMovie;
+    const myList = state.entities.myList;
+    const isOnList = myList[0].includes(dropDownMovie.movieId);
+    
+    return ({
+        movies: state.entities.movies,
+        myList,
+        dropDownMovie,
+        isOnList
+    })
+}
 
 const mDP = dispatch => ({
     addMovie: movieId => dispatch(addMovie(movieId)),

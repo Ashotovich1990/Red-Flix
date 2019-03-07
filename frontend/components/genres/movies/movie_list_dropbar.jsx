@@ -10,6 +10,7 @@ class MovieDropbar extends React.Component {
         this.handleRemove = this.handleRemove.bind(this);
         this.handlePlay = this.handlePlay.bind(this);
         this.myListButton = this.myListButton.bind(this);
+        this.renderButton = this.renderButton.bind(this);
     }
 
     handleClose() {
@@ -43,6 +44,14 @@ class MovieDropbar extends React.Component {
         };
     }
 
+    renderButton() {
+        if (this.props.isOnList) {
+            return <div id='remove-movie-button' onClick={this.handleRemove}>Remove</div>
+        } else {
+            return <div id='add-movie-button' onClick={this.handleAdd}>Add</div>
+        }
+    }
+
 
     render() {
         if (this.state.redirect) {
@@ -66,8 +75,7 @@ class MovieDropbar extends React.Component {
                  <div id="movie-dropbar-description">{movie.description}</div>
                  <div className='dropdown-buttons'>
                     <div id='add-movie-button'  onClick={this.handlePlay}>Play</div>
-                    <div id='add-movie-button' onClick={this.handleAdd}>Add</div>
-                    <div id='remove-movie-button' onClick={this.handleRemove}>Remove</div>
+                    {this.renderButton()}
                  </div>
                 </div>
                 <div className='dropbar-poster-container'>

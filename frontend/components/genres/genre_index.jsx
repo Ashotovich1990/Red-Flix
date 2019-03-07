@@ -2,6 +2,7 @@ import React from 'react';
 import GenreIndexItem from './genre_index_item';
 import MyListContainer from './my_list_container'
 import GenreMovieDisplayContainer from './movies/genre_movie_display_container';
+import SearchResultContainer from './search_result_container';
 
 class GenreIndex extends React.Component {
     constructor(props) {
@@ -52,6 +53,10 @@ class GenreIndex extends React.Component {
     // }
 
     render() {
+
+        if (this.props.search.item) {
+            return <SearchResultContainer />
+        }
 
         let genreNames
         let genreMain =<div></div>;
@@ -123,8 +128,10 @@ class GenreIndex extends React.Component {
         return (
          <div className="genre-container">
                <GenreMovieDisplayContainer genreId={this.props.genreId}/>
-               {genreMain}
-               {genreNames}
+               <div className="andy-fix-it">
+                {genreMain}
+                {genreNames}
+               </div>
          </div>
         );
     }

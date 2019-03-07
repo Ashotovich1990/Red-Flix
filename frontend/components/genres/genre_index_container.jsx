@@ -11,6 +11,7 @@ const mSP = (state,ownProps) => ({
     movies: state.entities.movies, 
     genreLists: state.entities.genreLists,
     genreNames: state.entities.genreNames,
+    search: state.search,
 });
 
 const mDP = dispatch => ({

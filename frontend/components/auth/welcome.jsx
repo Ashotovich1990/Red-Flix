@@ -5,13 +5,20 @@ import GenreNavContainer from './genre_nav_container';
 class Welcome extends React.Component {
     constructor(props) {
       super(props);
+      this.state = {phrase: ""}
       this.handleClick = this.handleClick.bind(this);
+      this.handleChange = this.handleChange.bind(this);
     }
 
     handleClick(e) {
       e.preventDefault();
       this.props.logout();
     }
+
+    handleChange(e) {
+      setTimeout(() => this.props.receiveSearchItem(this.state.phrase), 2)
+      this.setState({phrase: e.target.value});
+    } 
 
     render() {
       let content = this.props.currentUser ? 
@@ -21,6 +28,7 @@ class Welcome extends React.Component {
              <GenreNavContainer genres={this.props.genres}/>
            </div>
          <div className="welcome-user">
+           <input onChange={this.handleChange} className="search-box" type="input" placeholder="search"/>
            <h3 id="message">{this.props.currentUser.username}</h3>
            <button className="signout-button" onClick={this.handleClick}>Sign Out</button>
          </div> 

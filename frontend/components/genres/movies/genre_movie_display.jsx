@@ -12,7 +12,6 @@ class GenreMoviePlay extends React.Component {
 
     
     handleSoundOn() {
- 
         this.setState({muted: undefined})
     }
 
@@ -40,11 +39,8 @@ class GenreMoviePlay extends React.Component {
         if (this.state.movie && this.props.genreId !== '0') {
         // debugger
         return (
-            <div
-            onMouseEnter={this.handleSoundOn} 
-            onMouseLeave={this.handleSoundOff}
-                >
-                <video key={this.state.movie.id} className="genre-movie-play" autoPlay={true} muted={this.state.muted} loop={true} >
+            <div onMouseEnter={this.handleSoundOn} onMouseLeave={this.handleSoundOff}>
+                <video className="genre-movie-play" key={this.state.movie.id} autoPlay={true} muted={this.state.muted} loop={true} >
                 <source src={this.state.movie.video} type="video/mp4"/>
             
                 Your browser does not support the video tag.
