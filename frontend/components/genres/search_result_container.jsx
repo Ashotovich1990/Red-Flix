@@ -4,10 +4,14 @@ import SearchResult from './search_result';
 // import {receiveDropDownMovie} from '../../actions/display_actions';
 import {withRouter} from 'react-router-dom';
 
-const mSP = (state) => ({
+const mSP = (state) => {
+  
+    return {
     movies: Object.values(state.entities.movies),
-    searchItem: state.search.item
-});
+    searchItem: state.search.item,
+    genreLists: state.entities.genreLists,
+    genreNames: state.entities.genreNames,
+}};
 
 
 export default withRouter(connect(mSP,null)(SearchResult));

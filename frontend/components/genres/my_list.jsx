@@ -37,7 +37,7 @@ class MyList extends React.Component {
 
     render() {
 
-        const myListMessage = !this.props.movies.length ? 
+        let myListMessage = !this.props.movies.length ? 
         <div className='my-list-empty'>
             You haven't added any titles to your list yet
         </div> : 
@@ -46,7 +46,8 @@ class MyList extends React.Component {
         if (!this.props.movies.length) {
           return <div id='my-list-message'>{myListMessage}</div>;
         } 
-
+        
+        myListMessage = this.props.search ? <div id="my-list-title"><h1>Search Results</h1></div> : <div id="my-list-title"><h1>My List</h1></div>;
 
         return (
         <div className="my-list-container">

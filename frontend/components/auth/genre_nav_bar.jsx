@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 export const GenreNavBar = props => (
-    <div className="genre-nav-bar">
+    <div onClick={() => props.resetSearchItem()} className="genre-nav-bar">
       <Link onClick={() => props.fetchGenres()}
         to={`/browse/`}>Home</Link>
       <Link onClick={() => props.fetchGenre(2)}

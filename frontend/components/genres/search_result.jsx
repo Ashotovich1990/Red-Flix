@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchListContainer from './search_list_container';
 
 class SearchResult extends React.Component {
     constructor(props) {
@@ -30,20 +31,18 @@ class SearchResult extends React.Component {
         }
     }
 
-
     // props.movies and props.searchItem
 
     render() {
+
         return (
         !this.state.movies.length ? 
         <div className="search-empty-results">No matches Found</div>
         : 
-        <div className="search-empty-results">
-          <ul>
-              {this.state.movies.map(movie => <li key={movie.id}>{movie.title}</li>)}
-          </ul>
-        </div>
-        )
+        <div>
+           <SearchListContainer movies={this.state.movies} search={true} />
+        </div>)
+
     }
 }
 
