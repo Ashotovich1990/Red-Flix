@@ -81,7 +81,7 @@ class GenreIndexItem extends React.Component {
             to={`/browse/${this.props.genreId}`}><div className="genre-browse">{this.props.genreName} <div id="brows-icon">{this.state.browse}</div></div></Link>
           <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div>
           <ul className='genre-list'>
-            {this.props.movies.slice(this.state.start,this.state.end).map(movie => (<li key={movie.id}
+            {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}
             ><MovieListItemContainer genreId={this.props.genreId} hovered={this.state.hovered} content={movie}/></li>))}
