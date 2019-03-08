@@ -34,7 +34,9 @@ class GenreIndex extends React.Component {
     }
 
     componentDidUpdate(prev) {
-      window.scrollTo(0, 0)
+        if (this.props.genreId && this.props.genreId !== prev.genreId) {
+             window.scrollTo(0, 0)
+        }
     }
 
     componentWillUnmount() {
