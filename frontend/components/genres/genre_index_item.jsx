@@ -3,6 +3,7 @@ import MovieListItemContainer from './movies/movie_list_item_container';
 import {Link} from 'react-router-dom';
 import MovieDropbarContainer from './movies/movie_list_dropbar_container';
 
+
 class GenreIndexItem extends React.Component {
   constructor(props) {
     super(props)
@@ -13,6 +14,7 @@ class GenreIndexItem extends React.Component {
     this.onMouseLeaveBrowse = this.onMouseLeaveBrowse.bind(this)
     this.handleScrollRight = this.handleScrollRight.bind(this);
     this.handleScrollLeft = this.handleScrollLeft.bind(this);
+    this.scrollToItem = this.scrollToItem.bind(this)
   }
   
   onMouseEnterHandle(movie_id) {
@@ -31,6 +33,11 @@ class GenreIndexItem extends React.Component {
     } else {
     this.setState( {browse: 'browse all' });
     }
+  }
+
+  scrollToItem() {
+    const scrollItem = document.getElementById("movie-logo");
+    scrollItem.scrollIntoView(false);
   }
 
   onMouseLeaveBrowse() {

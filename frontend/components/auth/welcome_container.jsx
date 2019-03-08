@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Welcome from './welcome';
 import {logout} from '../../actions/session_actions';
 import {receiveSearchItem } from '../../actions/search_actions';
+import {resetSearchItem} from '../../actions/search_actions'
 
 const mapStateToProps = state => ({
    currentUser: state.entities.users[state.session.id],
@@ -12,6 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logout()),
     receiveSearchItem: phrase => dispatch(receiveSearchItem(phrase)),
+    resetSearchItem: () => dispatch(resetSearchItem()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

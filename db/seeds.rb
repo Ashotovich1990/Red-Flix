@@ -79,6 +79,29 @@ MovieList.create(movie_id: 11, genre_id: 4, sample: "false")
 MovieList.create(movie_id: 12, genre_id: 4, sample: "false")
 MovieList.create(movie_id: 13, genre_id: 4, sample: "false")
 
+=> [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+MovieList.find(9).update(sample: "true")
+MovieList.find(10).update(sample: "true")
+MovieList.find(11).update(sample: "true")
+MovieList.find(12).update(sample: "true")
+MovieList.find(13).update(sample: "true")
+MovieList.find(14).update(sample: "true")
+2, 4, 5, 26, 27, 28, 29
+[1, 3, 30, 31, 32, 33, 34]
+10, 11, 12, 13
+[16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+
+MovieList.find(18).update(sample: "true")
+MovieList.find(19).update(sample: "true")
+MovieList.find(20).update(sample: "true")
+MovieList.find(22).update(sample: "true")
+MovieList.find(25).update(sample: "true")
+
+
+
+
+
+
 Genre.create(name: "Dramas")
 
 Movie.create(title: "Leviathan", description: "In a Russian coastal town, Kolya is forced to fight the corrupt mayor when he is told that his house will be demolished. He recruits a lawyer friend to help, but the man's arrival brings further misfortune for Kolya and his family.", year: 2014, maturity_rating: "PG13")
@@ -100,6 +123,8 @@ Movie.create(title: "Everybody Dies But Me", description: "One Monday morning Ka
 Movie.create(title: "The Banishment", description: "A trip to the pastoral countryside reveals a dark, sinister reality for a family from the city.", year: 2007, maturity_rating: "PG13")
 
 Movie.create(title: "The Tribe", description: "A deaf boy joins a boarding school for similar children. Confronted by the violent and criminal antics of some of the other boys and girls, he struggles to conform and join the 'tribe'.", year: 2014, maturity_rating: "R")
+
+Movie.create(title: "Solaris", description: "Psychologist Kris Kelvin is being sent on an interstellar journey to evaluate whether a decades-old space station should continue to study the oceanic planet Solaris. He spends his last day on Earth with his elderly father and retired pilot Berton. Years earlier, Berton had been part of an exploratory team at Solaris but was recalled when he described seeing a four-meter-tall child on the surface of the water. This was dismissed as a hallucination by a panel of scientists, but now that the remaining crew members are making similarly strange reports, Kris's skills are needed.", year: 1972, maturity_rating: "NC-17")
 
 MovieList.create(movie_id: 14, genre_id: 5, sample: "true")
 MovieList.create(movie_id: 15, genre_id: 5, sample: "true")
@@ -238,9 +263,17 @@ m.photo.attach(io: m_p, filename: '22.jpg')
 m_v = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/Banishment.mp4')
 m.video.attach(io: m_v, filename: '22.mp4')
 
-m = Movie.find(23)
-m_p = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/the+tribe.jpg')
-m.photo.attach(io: m_p, filename: '23.jpg')
-m_v = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/The+Tribe+Trailer.mp4')
-m.video.attach(io: m_v, filename: '23.mp4')
+m = Movie.find(24)
+m_p = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/solaris.jpg')
+m.photo.attach(io: m_p, filename: '24.jpg')
+m_v = open('https://s3-us-west-1.amazonaws.com/file-up-load-prod/Solaris.mp4')
+m.video.attach(io: m_v, filename: '24.mp4')
 
+Genre.create(name: "Unknown Gems")
+
+MovieList.create(movie_id: 1, genre_id: 6)
+MovieList.create(movie_id: 2, genre_id: 6)
+MovieList.create(movie_id: 3, genre_id: 6)
+MovieList.create(movie_id: 24, genre_id: 6)
+MovieList.create(movie_id: 22, genre_id: 6)
+MovieList.create(movie_id: 20, genre_id: 6)

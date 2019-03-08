@@ -23,6 +23,7 @@ class MovieListItem extends React.Component {
       const scrollItem = document.getElementById("movie-ad");
       scrollItem.scrollIntoView(false);
     }
+    
     handleClick() {
         setTimeout(()=>this.scrollToItem(), 0)
         this.props.receiveDropDownMovie(this.props.content.id, this.props.genreId);

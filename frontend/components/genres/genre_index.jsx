@@ -3,11 +3,13 @@ import GenreIndexItem from './genre_index_item';
 import MyListContainer from './my_list_container'
 import GenreMovieDisplayContainer from './movies/genre_movie_display_container';
 import SearchResultContainer from './search_result_container';
+import { throws } from 'assert';
 
 class GenreIndex extends React.Component {
     constructor(props) {
         super(props)
         this.state = {movieToDisplay: '1'}
+        // this.myRef = React.createRef();
         // this.userWatchlist = this.userWatchlist.bind(this)
         // this.setMovieToDisplay = this.setMovieToDisplay.bind(this)
     }
@@ -26,18 +28,23 @@ class GenreIndex extends React.Component {
         } else {
           this.props.fetchGenres()
         }
+     
+            window.scrollTo(0, 0)
+         
     }
 
-    componentDidUpdate() {
-    //    this.props.receiveDropDownMovie(null, null);
+    componentDidUpdate(prev) {
+      window.scrollTo(0, 0)
     }
 
     componentWillUnmount() {
+        // this.myRef.current.scrollTo(0, 0);
         if (this.props.genreId) {
           this.props.fetchGenre(this.props.genreId)
         } else {
           this.props.fetchGenres()
         }
+        window.scrollTo(0, 0)
     }
 
     // userWatchlist() {
@@ -59,7 +66,7 @@ class GenreIndex extends React.Component {
         }
 
         let genreNames
-        let genreMain =<div></div>;
+        let genreMain = <div></div>;
         if (!this.props.genreId) {
             genreNames = Object.keys(this.props.genreLists).map((key) => (
                 <GenreIndexItem
@@ -126,7 +133,7 @@ class GenreIndex extends React.Component {
       
         
         return (
-         <div className="genre-container">
+         <div  className="genre-container">
                <GenreMovieDisplayContainer genreId={this.props.genreId}/>
                <div className="andy-fix-it">
                 {genreMain}
