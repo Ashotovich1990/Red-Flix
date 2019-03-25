@@ -31,6 +31,13 @@ class Movie < ApplicationRecord
 
     has_one_attached :photo 
 
+    scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
+    scope :with_preloaded_photo, -> { preload(photo_attachment: :blob) }
+
     has_one_attached :video
+
+    scope :with_eager_loaded_video, -> { eager_load(video_attachment: :blob) }
+    scope :with_preloaded_video, -> { preload(video_attachment: :blob) }
+
 
 end

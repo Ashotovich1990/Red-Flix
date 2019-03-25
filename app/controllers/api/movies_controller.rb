@@ -1,4 +1,5 @@
 class Api::MoviesController < ApplicationController
+    before_action :ensure_login
     # def index 
     #     # if params.has_key?(:genre_id)
     #     #   @movies = Movie.joins(:genres).where(genres: {id: params[:genre_id]})

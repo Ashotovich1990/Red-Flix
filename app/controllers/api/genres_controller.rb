@@ -1,4 +1,6 @@
 class Api::GenresController < ApplicationController
+    before_action :ensure_login
+    
     def index 
         @sample = Genre.includes(:sample_movies)
         # @sample = Genre.includes(sample_movies: :actors)
@@ -28,14 +30,13 @@ class Api::GenresController < ApplicationController
     end
 
     def show 
-        @movies = Movie.joins(:genres).where(genres: {id: params[:id]})
+        @movies = Movie.with_attached_photo.with_attached_video.joins(:genres).where(genres: {id: params[:id]})
         @genre_lists = Hash.new
         @genre_names = Hash.new
         @my_watchlist = Hash.new
         
         @movie_ids = @movies.map {|el| el.id}
         if @movies
-        # @sample = Genre.joins(:movie_lists).where(movie_lists: { movie_id: movie_ids})
           @sample = MovieList.includes(:genre).where( movie_id: @movie_ids)
           @sample.each do |movie_list|
             @genre_names[movie_list.genre.id] = movie_list.genre.name
@@ -53,20 +54,6 @@ class Api::GenresController < ApplicationController
         
         render :show
     end
-
-    private 
-
-    # def group_movie_by_genre(genres)
-    #     groups = Hash.new 
-    #     movies = Hash.new
-    #     genres.each do |genre|
-    #         groups[genre.name] ||= []
-
-    #         genre.sample_movies.each do |movie|
-    #             groups[genre.name] += [movie.id]
-    #             movies[movie.id] = movie
-    #         end
-    #     end
-    # end
+ 
 end
 
