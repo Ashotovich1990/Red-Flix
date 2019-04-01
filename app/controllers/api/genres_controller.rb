@@ -3,29 +3,27 @@ class Api::GenresController < ApplicationController
     
     def index 
         @sample = Genre.includes(:sample_movies)
-        # @sample = Genre.includes(sample_movies: :actors)
         @genre_lists = Hash.new 
         @genre_names = Hash.new
         @my_watchlist = Hash.new
         @movies = []
+
         @sample.each do |genre|
-            # @genre_lists[genre.id] ||= []
             if genre.sample_movie_ids[0] 
             @genre_names[genre.id] = genre.name
-            # genre.sample_movies.each do |movie|
                 @genre_lists[genre.id] = genre.sample_movie_ids
-                @movies += genre.sample_movies
-            # end
+                @movies += genre.sample_movies.with_attached_photo.with_attached_video
             end
         end
-        
+    
         @my_watchlist[0] = current_user.movie_ids
         if (@my_watchlist[0].size >= 1)
-            @movies += current_user.movies
+            
+            @movies += Movie.with_attached_photo.with_attached_video.joins(:users).where(users: {id: current_user.id})
             @genre_names[0] = Genre.first.name
             @genre_lists[0] = @my_watchlist[0]
         end
-
+     
         render :index
     end
 
@@ -47,7 +45,7 @@ class Api::GenresController < ApplicationController
 
         @my_watchlist[0] = current_user.movie_ids
         if (!@my_watchlist.empty?)
-            @movies += current_user.movies
+            @movies += Movie.with_attached_photo.with_attached_video.joins(:users).where(users: {id: current_user.id})
             @genre_names[0] = Genre.first.name
             @genre_lists[0] = @my_watchlist[0]
         end
