@@ -7,7 +7,7 @@ import MovieDropbarContainer from './movies/movie_list_dropbar_container';
 class GenreIndexItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrows: false, linkArrow: <div></div>}
+    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrowLeft: false, showArrowRight: false, linkArrow: <div></div>}
     this.onMouseEnterHandle = this.onMouseEnterHandle.bind(this)
     this.onMouseLeaveHandle = this.onMouseLeaveHandle.bind(this)
     this.onMouseEnterBrowse = this.onMouseEnterBrowse.bind(this)
@@ -71,22 +71,35 @@ class GenreIndexItem extends React.Component {
 
   handleScrollRight() {
     if (this.state.end <= this.props.movies.length) {
-     this.setState( { start: this.state.start + 1, end: this.state.end + 1 })
+      this.setState( { start: this.state.start + 1, end: this.state.end + 1 }, ()=> {
+        this.handleShowArrows()
+      })
     }
   }
 
   handleScrollLeft() {
     if (this.state.start > 0) {
-    this.setState( { start: this.state.start - 1, end: this.state.end - 1 })
+      this.setState( { start: this.state.start - 1, end: this.state.end - 1 }, () => { 
+        this.handleShowArrows()
+      })
     }
  }
 
  handleShowArrows() {
-    this.setState({showArrows: true})
+    if (this.state.start !== 0) {
+      this.setState({showArrowLeft: true})
+    } else {
+      this.setState({showArrowLeft: false})
+    }
+    if (this.props.movies.length >= 6) {
+      this.setState({showArrowRight: true})
+    } else {
+      this.setState({showArrowRight: false})
+    }
  }
 
  handleHideArrows() {
-  this.setState({showArrows: false})
+  this.setState({showArrowLeft: false, showArrowRight: false})
 }
   
   render () {
@@ -104,14 +117,17 @@ class GenreIndexItem extends React.Component {
     
     const genreType = this.props.genreUrl === '0' ? "my-list" : "genre";
 
-    const leftArrow = this.state.showArrows ? <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div > : <div className="empty-left-arrow"><i className="fas fa-arrow-left"></i></div>;
-    const rightArrow = this.state.showArrows ? <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> : <div className="empty-rigth-arrow"><i className="fas fa-arrow-right"></i></div>;
+    const leftArrow = this.state.showArrowLeft ? <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div > : <div className="empty-left-arrow"><i className="fas fa-arrow-left"></i></div>;
+    const rightArrow = this.state.showArrowRight ? <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> : <div className="empty-rigth-arrow"><i className="fas fa-arrow-right"></i></div>;
 
     return (
       <div className={genreType}
       onMouseEnter={this.onMouseEnterLinkArrow}
       onMouseLeave={this.onMouseLeaveLinkArrow}
       >
+      <div  onMouseEnter={this.handleShowArrows}
+            onMouseLeave={this.handleHideArrows}
+            >
             {myListMessage}
             <Link className="link-to-new-page"
             onClick={() => this.props.fetchGenre(this.props.genreId)}
@@ -122,8 +138,6 @@ class GenreIndexItem extends React.Component {
             className="genre-browse">{this.props.genreName}<div id="brows-icon">{this.state.browse}</div><div className="new-link-arrow">{this.state.linkArrow}</div></div></Link>
             {leftArrow}
           <ul 
-           onMouseEnter={this.handleShowArrows}
-           onMouseLeave={this.handleHideArrows}
           className='genre-list'>
             {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
@@ -132,6 +146,7 @@ class GenreIndexItem extends React.Component {
           </ul>
           {rightArrow}
           <MovieDropbarContainer genreId={this.props.genreId}/>
+        </div>
       </div>
     );
   }
