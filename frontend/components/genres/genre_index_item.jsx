@@ -7,7 +7,7 @@ import MovieDropbarContainer from './movies/movie_list_dropbar_container';
 class GenreIndexItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {hovered: null, browse: null, start: 0, end: 6, showArrows: false}
+    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrows: false, linkArrow: <div></div>}
     this.onMouseEnterHandle = this.onMouseEnterHandle.bind(this)
     this.onMouseLeaveHandle = this.onMouseLeaveHandle.bind(this)
     this.onMouseEnterBrowse = this.onMouseEnterBrowse.bind(this)
@@ -17,8 +17,18 @@ class GenreIndexItem extends React.Component {
     this.scrollToItem = this.scrollToItem.bind(this)
     this.handleHideArrows = this.handleHideArrows.bind(this);
     this.handleShowArrows = this.handleShowArrows.bind(this);
+    this.onMouseEnterLinkArrow = this.onMouseEnterLinkArrow.bind(this);
+    this.onMouseLeaveLinkArrow = this.onMouseLeaveLinkArrow.bind(this);
   }
   
+  onMouseEnterLinkArrow() {
+    this.setState( {linkArrow: <i class="fas fa-chevron-right"></i>})
+  }
+  
+  onMouseLeaveLinkArrow() {
+    this.setState( {linkArrow: <div></div>})
+  }
+
   onMouseEnterHandle(movie_id) {
     return (e) => {
       this.setState({hovered: movie_id})
@@ -30,10 +40,26 @@ class GenreIndexItem extends React.Component {
   }
 
   onMouseEnterBrowse() {
+    let str;
     if (this.props.genreId === '0') {
-      this.setState( {browse: 'open my list' });
+      str = 'open my list'
     } else {
-    this.setState( {browse: 'browse all' });
+      str = 'browse all' 
+    }
+    let time = 0;
+    if (this.state.browse === "") {
+      for (let i = 0; i < str.length; i++) {
+        time += 30
+        setTimeout(() => {
+          this.setState( {browse: this.state.browse + str[i] });
+        }, time)
+      }
+    }
+  }
+  
+  onMouseLeaveBrowse() {
+    if (this.state.browse === "browse all" || this.state.browse === "open my list") {
+      this.setState( {browse: "" });
     }
   }
 
@@ -42,9 +68,6 @@ class GenreIndexItem extends React.Component {
     scrollItem.scrollIntoView(false);
   }
 
-  onMouseLeaveBrowse() {
-    this.setState( {browse: null });
-  }
 
   handleScrollRight() {
     if (this.state.end <= this.props.movies.length) {
@@ -85,26 +108,28 @@ class GenreIndexItem extends React.Component {
     const rightArrow = this.state.showArrows ? <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> : <div className="empty-rigth-arrow"><i className="fas fa-arrow-right"></i></div>;
 
     return (
-      <div onHover 
-          onMouseEnter={this.handleShowArrows}
-          onMouseLeave={this.handleHideArrows}
-      className={genreType}>
+      <div className={genreType}
+      onMouseEnter={this.onMouseEnterLinkArrow}
+      onMouseLeave={this.onMouseLeaveLinkArrow}
+      >
             {myListMessage}
-            <Link id="link-to-new-page"
+            <Link className="link-to-new-page"
             onClick={() => this.props.fetchGenre(this.props.genreId)}
+            to={`/browse/${this.props.genreId}`}>
+            <div 
             onMouseEnter={this.onMouseEnterBrowse}
             onMouseLeave={this.onMouseLeaveBrowse}
-            to={`/browse/${this.props.genreId}`}><div className="genre-browse">{this.props.genreName} <div id="brows-icon">{this.state.browse}</div></div></Link>
+            className="genre-browse">{this.props.genreName}<div id="brows-icon">{this.state.browse}</div><div className="new-link-arrow">{this.state.linkArrow}</div></div></Link>
             {leftArrow}
-          {/* <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div> */}
-          <ul className='genre-list'>
+          <ul 
+           onMouseEnter={this.handleShowArrows}
+           onMouseLeave={this.handleHideArrows}
+          className='genre-list'>
             {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}
             ><MovieListItemContainer genreId={this.props.genreId} hovered={this.state.hovered} content={movie}/></li>))}
           </ul>
-          {/* <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div> */}
-          {/* <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> */}
           {rightArrow}
           <MovieDropbarContainer genreId={this.props.genreId}/>
       </div>

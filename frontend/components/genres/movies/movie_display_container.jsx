@@ -5,6 +5,7 @@ import {fetchMovie} from '../../../actions/movies_actions'
 
 const mSP = (state,ownProps) => ({
     movieId: ownProps.match.params.movieId,
+    genrePageId: ownProps.match.params.genreId,
     movies: state.entities.movies,
 })
 

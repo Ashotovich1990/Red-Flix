@@ -1,6 +1,5 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-// import MovieDropbarContainer from './movie_list_dropbar_container';
 
 class MovieListItem extends React.Component {
     constructor(props) {
@@ -36,7 +35,8 @@ class MovieListItem extends React.Component {
     
     render() {
         if (this.state.redirect) {
-          return <Redirect to={`/browse/watch/${this.props.content.id}`}/>
+            const genreUrl = this.props.pageGenreId ? this.props.pageGenreId : "main";
+            return <Redirect to={`/browse/${genreUrl}/watch/${this.props.content.id}`}/>    
         } else if (this.props.hovered === this.props.content.id) {
         return  (
         <div>

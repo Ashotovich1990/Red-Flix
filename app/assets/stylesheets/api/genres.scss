@@ -9,11 +9,13 @@
     max-width: 100%;
     overflow: hidden;
 
-    #link-to-new-page {
+    .link-to-new-page {
         font-size: 20px;
         margin-left: 2%;
         color: white;
         text-decoration: none;
+        display: block;
+        width: fit-content;
     }
 
     .andy-fix-it {
@@ -306,12 +308,21 @@ img {
 }
 
 .genre-browse {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
+    font-size: 25px;
    #brows-icon {
-       font-size: 80%;
+       font-size: 60%;
        margin-left: 10px;
+       margin-right: 10px;
        margin-top: auto;
+   }
+
+   .new-link-arrow {
+      font-size: 80%;
+      font-size: 80%;
+      position: relative;
+      top: 5px;
    }
 }
 
@@ -345,5 +356,21 @@ img {
     right: -94%;
     font-size: xx-large;
     color: transparent;
+}
+
+.go-back {
+    position: absolute;
+    color: white;
+    font-size: larger;
+    margin-top: 10vh;
+    margin-left: 3vh;
+}
+
+.go-back-big {
+    position: absolute;
+    color: white;
+    font-size: xx-large;
+    margin-top: 10vh;
+    margin-left: 3vh;
 }
 

@@ -3,24 +3,14 @@ import GenreIndexItem from './genre_index_item';
 import MyListContainer from './my_list_container'
 import GenreMovieDisplayContainer from './movies/genre_movie_display_container';
 import SearchResultContainer from './search_result_container';
-import { throws } from 'assert';
+import Footer from './footer';
+
 
 class GenreIndex extends React.Component {
     constructor(props) {
         super(props)
         this.state = {movieToDisplay: '1'}
-        // this.myRef = React.createRef();
-        // this.userWatchlist = this.userWatchlist.bind(this)
-        // this.setMovieToDisplay = this.setMovieToDisplay.bind(this)
     }
-
-    // setMovieToDisplay() {
-    //     if (this.props.genreId === '0') {
-    //        this.setState({ movieToDisplay: null})
-    //     } else if (this.props.genreId) {
-    //        this.setState({ movieToDisplay: this.props.genreLists[this.props.genreId][0]})
-    //     } 
-    // }
 
     componentDidMount() {
         if (this.props.genreId) {
@@ -49,22 +39,14 @@ class GenreIndex extends React.Component {
         window.scrollTo(0, 0)
     }
 
-    // userWatchlist() {
-    //     debugger
-    //     return (
-    //     <GenreIndexItem
-    //     key='0' 
-    //     fetchGenre ={this.props.fetchGenre}
-    //     genreId='0'
-    //     genreName={this.props.genreNames[0]} 
-    //     movies={this.props.genreLists[0].map(movie_id => this.props.movies[movie_id])} />
-    //     );
-    // }
-
     render() {
 
         if (this.props.search.item) {
-            return <SearchResultContainer />
+            return ( <div>
+                <SearchResultContainer />
+                <Footer />
+                </div>
+            )
         }
 
         let genreNames
@@ -84,7 +66,11 @@ class GenreIndex extends React.Component {
                 )
             )
         } else if (this.props.genreId === '0') {
-            return <MyListContainer />
+            return (
+                <div>
+                <MyListContainer />
+                <Footer />
+                </div>)
         } else {
             //   commented thi sout of line 73 to remove my list from other genres key === '0' ||
                 genreMain = Object.keys(this.props.genreLists).map((key) => {
@@ -120,20 +106,7 @@ class GenreIndex extends React.Component {
             )
 
         }
-
-        let movieToDisplay;
-
-        // if (this.props.genreId === 0) {
-        //    movieToDisplay = <div></div>;
-        // } else if (this.props.genreId) {
-        //     debugger
-        //    movieToDisplay = <GenreMovieDisplayContainer genreMovieId={this.props.genreLists[this.props.genreId][0]} />;
-
-        // } else {
-        //     movieToDisplay = <GenreMovieDisplayContainer genreMovieId="1" />
-        // }
-      
-        
+   
         return (
          <div  className="genre-container">
                <GenreMovieDisplayContainer genreId={this.props.genreId}/>
@@ -141,6 +114,7 @@ class GenreIndex extends React.Component {
                 {genreMain}
                 {genreNames}
                </div>
+                <Footer />
          </div>
         );
     }

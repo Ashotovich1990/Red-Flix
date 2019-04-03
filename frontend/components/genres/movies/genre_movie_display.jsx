@@ -21,23 +21,20 @@ class GenreMoviePlay extends React.Component {
      
 
     componentDidMount() {
-        // debugger
         this.props.fetchMovie(this.props.movieId).then(() => this.setState({movie: this.props.movies[this.props.movieId]}))
     }
 
     componentDidUpdate(prev) {
         if (this.props.movieId !== prev.movieId) {
         this.props.fetchMovie(this.props.movieId).then(() => {
-            // debugger
             this.setState({movie: this.props.movies[this.props.movieId]})
             }
-            ).then(() => console.log(this.state.movie))
+            )
         }
     }
 
     render() {
         if (this.state.movie && this.props.genreId !== '0') {
-        // debugger
         return (
             <div onMouseEnter={this.handleSoundOn} onMouseLeave={this.handleSoundOff}>
                 <video className="genre-movie-play" key={this.state.movie.id} autoPlay={true} muted={this.state.muted} loop={true} >

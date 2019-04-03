@@ -52,7 +52,7 @@ class Welcome extends React.Component {
         (<div >
              <div className="welcome-new">
              <h1 id="main-logo">RedFlix</h1> 
-             <Link to="/login" className="signin-button"><p id="signin">Sign In</p></Link>
+             <Link to="/login" className="signin-button">Sign In</Link>
          </div>
          </div>);
        

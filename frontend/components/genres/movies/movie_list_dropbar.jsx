@@ -19,20 +19,14 @@ class MovieDropbar extends React.Component {
 
     handleAdd() {
         this.props.addMovie(this.props.dropDownMovie.movieId)
-        // .then(() => this.myListButton())
     }
 
     handleRemove() {
         this.props.removeMovie(this.props.dropDownMovie.movieId)
-        // .then(() => this.myListButton())
     }
 
     handlePlay() {
         this.setState({redirect: true})
-    }
-
-    componentDidUpdate() {
-        // this.myListButton()
     }
 
     myListButton() {
@@ -57,13 +51,6 @@ class MovieDropbar extends React.Component {
         if (this.state.redirect) {
             return <Redirect to={`/browse/watch/${this.props.dropDownMovie.movieId}`}/>
         }
-
-        // let addRemoveButton;
-        // if (this.state.added) {
-        //    addRemoveButton = <div id='remove-movie-button' onClick={this.handleRemove}>Remove</div>
-        // } else {
-        //    addRemoveButton = <div id='add-movie-button' onClick={this.handleAdd}>Add</div>
-        // }
 
         const movie = this.props.movies[this.props.dropDownMovie.movieId]
 

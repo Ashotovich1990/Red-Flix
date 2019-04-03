@@ -69,7 +69,7 @@ class SessionForm extends React.Component {
              </label>
              <ul id="errors">{this.props.errors.map((err,idx) => <li key={idx}>{err}</li>)}</ul>
              <input type="submit" value={this.props.formType}/>
-             <input id="demo-button" type="submit" value="DEMO" onClick={this.handleDemo}/>
+             <input id="demo-button" type="submit" value="Demo" onClick={this.handleDemo}/>
             <p>{this.props.formOutInfo} {link}</p>
              </div>
             </form>
