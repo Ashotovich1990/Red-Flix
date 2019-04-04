@@ -9,6 +9,8 @@ const mSP = state => {
     
     return ({
         movies: state.entities.movies,
+        genreLists: state.entities.genreLists,
+        genreNames: state.entities.genreNames,
         myList,
         dropDownMovie,
         isOnList
