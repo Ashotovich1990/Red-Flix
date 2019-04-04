@@ -109,12 +109,14 @@ class GenreIndex extends React.Component {
    
         return (
          <div  className="genre-container">
-               <GenreMovieDisplayContainer genreId={this.props.genreId}/>
-               <div className="andy-fix-it">
+            <GenreMovieDisplayContainer genreId={this.props.genreId}/>
+            <div className="andy-fix-it">
                 {genreMain}
                 {genreNames}
-               </div>
+            </div>
+            <div className="footer-container">
                 <Footer />
+            </div>
          </div>
         );
     }

@@ -24,9 +24,8 @@ class MovieListItem extends React.Component {
     }
     
     handleClick() {
-        setTimeout(()=>this.scrollToItem(), 0)
-        this.props.receiveDropDownMovie(this.props.content.id, this.props.genreId);
-        
+        setTimeout(() => this.scrollToItem(), 0)
+        this.props.receiveDropDownMovie(this.props.content.id, this.props.genreId);   
     }
 
     handlePlay() {

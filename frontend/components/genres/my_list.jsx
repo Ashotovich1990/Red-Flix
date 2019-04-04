@@ -34,7 +34,6 @@ class MyList extends React.Component {
         }
      }
 
-
     render() {
 
         let myListMessage = !this.props.movies.length ? 
@@ -47,20 +46,20 @@ class MyList extends React.Component {
           return <div id='my-list-message'>{myListMessage}</div>;
         } 
         
-        myListMessage = this.props.search ? <div id="my-list-title"><h1>Search Results</h1></div> : <div id="my-list-title"><h1>My List</h1></div>;
+        myListMessage = this.props.search ? <div id="my-list-title"><h1 className="my-genre-title">Search Results</h1></div> : <div id="my-list-title"><h1>My List</h1></div>;
 
         return (
         <div className="my-list-container">
         <div className='my-list'>
             {myListMessage}
-            <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div>
-          <ul className='genre-list'>
-            {this.props.movies.slice(this.state.start,this.state.end).map(movie => (<li key={movie.id}
+            {/* <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div> */}
+          <ul className='my-genre-list'>
+            {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}
             ><MovieListItemContainer genreId='0' hovered={this.state.hovered} content={movie}/></li>))}
           </ul>
-          <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div>
+          {/* <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> */}
         
           <MovieDropbarContainer genreId='0'/>
       </div>

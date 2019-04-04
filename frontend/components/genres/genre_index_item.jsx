@@ -19,6 +19,7 @@ class GenreIndexItem extends React.Component {
     this.handleShowArrows = this.handleShowArrows.bind(this);
     this.onMouseEnterLinkArrow = this.onMouseEnterLinkArrow.bind(this);
     this.onMouseLeaveLinkArrow = this.onMouseLeaveLinkArrow.bind(this);
+    this.isLiknedGenre = this.isLiknedGenre.bind(this);
   }
   
   onMouseEnterLinkArrow() {
@@ -26,7 +27,7 @@ class GenreIndexItem extends React.Component {
   }
   
   onMouseLeaveLinkArrow() {
-    this.setState( {linkArrow: <div></div>})
+    if (this.state.browse === "") this.setState( {linkArrow: <div></div>})
   }
 
   onMouseEnterHandle(movie_id) {
@@ -40,6 +41,7 @@ class GenreIndexItem extends React.Component {
   }
 
   onMouseEnterBrowse() {
+    this.setState( {linkArrow: <i class="fas fa-chevron-right"></i>})
     let str;
     if (this.props.genreId === '0') {
       str = 'open my list'
@@ -51,7 +53,9 @@ class GenreIndexItem extends React.Component {
       for (let i = 0; i < str.length; i++) {
         time += 30
         setTimeout(() => {
-          this.setState( {browse: this.state.browse + str[i] });
+          
+            this.setState( {browse: this.state.browse + str[i] });
+     
         }, time)
       }
     }
@@ -59,7 +63,7 @@ class GenreIndexItem extends React.Component {
   
   onMouseLeaveBrowse() {
     if (this.state.browse === "browse all" || this.state.browse === "open my list") {
-      this.setState( {browse: "" });
+      this.setState( {browse: "",  linkArrow: <div></div> });
     }
   }
 
@@ -91,11 +95,30 @@ class GenreIndexItem extends React.Component {
     } else {
       this.setState({showArrowLeft: false})
     }
-    if (this.props.movies.length >= 6) {
+    if (this.props.movies.length >= 7) {
       this.setState({showArrowRight: true})
     } else {
       this.setState({showArrowRight: false})
     }
+ }
+
+ isLiknedGenre() {
+   if (this.props.genreId !== this.props.genreUrl) {
+      return (
+        <Link className="link-to-new-page"
+          onClick={() => this.props.fetchGenre(this.props.genreId)}
+          to={`/browse/${this.props.genreId}`}>
+          <div 
+          onMouseEnter={this.onMouseEnterBrowse}
+          onMouseLeave={this.onMouseLeaveBrowse}
+          className="genre-browse">{this.props.genreName}<div id="brows-icon">{this.state.browse}</div><div className="new-link-arrow">{this.state.linkArrow}</div></div>
+        </Link>
+      )
+   } else {
+     return (
+        <div className="genre-browse-no-link">{this.props.genreName}</div>
+     )
+   }
  }
 
  handleHideArrows() {
@@ -129,13 +152,7 @@ class GenreIndexItem extends React.Component {
             onMouseLeave={this.handleHideArrows}
             >
             {myListMessage}
-            <Link className="link-to-new-page"
-            onClick={() => this.props.fetchGenre(this.props.genreId)}
-            to={`/browse/${this.props.genreId}`}>
-            <div 
-            onMouseEnter={this.onMouseEnterBrowse}
-            onMouseLeave={this.onMouseLeaveBrowse}
-            className="genre-browse">{this.props.genreName}<div id="brows-icon">{this.state.browse}</div><div className="new-link-arrow">{this.state.linkArrow}</div></div></Link>
+            {this.isLiknedGenre()}
             {leftArrow}
           <ul 
           className='genre-list'>
