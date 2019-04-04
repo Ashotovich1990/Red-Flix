@@ -206,6 +206,25 @@ img {
         padding-top: 25px;
         line-height: 1.2;
     }
+
+}
+
+.sound-control {
+    position: absolute;
+    border:1px solid white;    
+    height: 40px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    top: 470px;
+    right: 5%;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
 
 .movie-list-movie-play {

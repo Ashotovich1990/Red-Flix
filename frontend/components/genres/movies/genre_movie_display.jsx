@@ -14,6 +14,7 @@ class GenreMoviePlay extends React.Component {
         this.renderButton = this.renderButton.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.soundControl = this.soundControl.bind(this);
     }
     
     handlePlayMovie() {
@@ -77,6 +78,14 @@ class GenreMoviePlay extends React.Component {
         return <div className='genre-movie-button' onClick={func}><div>{icon} My List</div></div>
     }
 
+    soundControl() {
+        if (this.state.muted) {
+            return <div className="sound-control" onClick={this.handleSoundOn}><div><i class="fas fa-volume-mute"></i></div></div>
+        } else {
+            return <div className="sound-control" onClick={this.handleSoundOff}><div><i class="fas fa-volume-up"></i></div></div>
+        }
+    }
+
     render() {
         if (this.state.redirect) {
             const genreUrl = this.props.pageGenreId ? this.props.pageGenreId : "main";
@@ -85,14 +94,17 @@ class GenreMoviePlay extends React.Component {
 
         if (this.state.movie && this.props.genreId !== '0') {
         return (
-            <div onMouseEnter={this.handleSoundOn} onMouseLeave={this.handleSoundOff}>
-                {this.builtMovieBox()}
-                <video className="genre-movie-play" key={this.state.movie.id} autoPlay={true} muted={this.state.muted} loop={true} >
-                <source src={this.state.movie.video} type="video/mp4"/>
-            
-                Your browser does not support the video tag.
-            </video>
-        </div>)
+            <div className="genre-movie-box-container">
+                <div>
+                    {this.builtMovieBox()}
+                    <video className="genre-movie-play" key={this.state.movie.id} autoPlay={true} muted={this.state.muted} loop={true} >
+                        <source src={this.state.movie.video} type="video/mp4"/>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {this.soundControl()}
+            </div>
+        )
 
         } else {
             return null;
