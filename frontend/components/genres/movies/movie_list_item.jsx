@@ -14,8 +14,15 @@ class MovieListItem extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.scrollToItem = this.scrollToItem.bind(this);
-        this.handlePlay = this.handlePlay.bind(this)
+        this.handlePlay = this.handlePlay.bind(this);
+        this.changeDropDownMovie = this.changeDropDownMovie.bind(this);
   
+    }
+
+    changeDropDownMovie() {
+        if (this.props.dropDownMovie.movieId && this.props.genreId === this.props.dropDownMovie.genreId) {
+            this.props.receiveDropDownMovie(this.props.content.id, this.props.genreId);
+        }
     }
     
     scrollToItem() {
@@ -36,10 +43,10 @@ class MovieListItem extends React.Component {
         if (this.state.redirect) {
             const genreUrl = this.props.pageGenreId ? this.props.pageGenreId : "main";
             return <Redirect to={`/browse/${genreUrl}/watch/${this.props.content.id}`}/>    
-        } else if (this.props.hovered === this.props.content.id) {
+        } else if (this.props.hovered === this.props.content.id || this.props.dropDownMovie.movieId === this.props.content.id) {
         return  (
-        <div>
-            <div style={this.style}>
+        <div onMouseEnter={this.changeDropDownMovie}>
+            <div  style={this.style}>
               <div className="movie-list-item-content">
                 <div className="movie-item-bar">
                   <div id={`maturity-rating-${this.props.content.maturity_rating}`}>{this.props.content.maturity_rating}</div>
@@ -53,7 +60,7 @@ class MovieListItem extends React.Component {
         </div>
         )
         } else {
-        return <img src={this.props.content.poster} alt=""></img>
+        return <img onMouseEnter={this.changeDropDownMovie} src={this.props.content.poster} alt=""></img>
         }
     }   
 };

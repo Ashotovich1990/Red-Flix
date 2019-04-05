@@ -6,7 +6,8 @@ import {withRouter} from 'react-router-dom';
 const mSP = (state,ownProps) => ({
     hovered: ownProps.hovered,
     content: ownProps.content,
-    pageGenreId: ownProps.match.params.genreId 
+    pageGenreId: ownProps.match.params.genreId,
+    dropDownMovie: state.dropDownMovie,
 });
 
 const mDP = dispatch => ({

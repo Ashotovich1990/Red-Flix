@@ -7,7 +7,7 @@ import MovieDropbarContainer from './movies/movie_list_dropbar_container';
 class GenreIndexItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrowLeft: false, showArrowRight: false, linkArrow: <div></div>}
+    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrowLeft: false, showArrowRight: false, linkArrow: <div></div>, style: 'genre-list'}
     this.onMouseEnterHandle = this.onMouseEnterHandle.bind(this)
     this.onMouseLeaveHandle = this.onMouseLeaveHandle.bind(this)
     this.onMouseEnterBrowse = this.onMouseEnterBrowse.bind(this)
@@ -20,8 +20,26 @@ class GenreIndexItem extends React.Component {
     this.onMouseEnterLinkArrow = this.onMouseEnterLinkArrow.bind(this);
     this.onMouseLeaveLinkArrow = this.onMouseLeaveLinkArrow.bind(this);
     this.isLiknedGenre = this.isLiknedGenre.bind(this);
+    this.handleCarouselStyle = this.handleCarouselStyle.bind(this);
+  }
+
+  handleCarouselStyle() {
+    
+     if (this.props.dropDownMovie.genreId === this.props.genreId) {
+ 
+        this.setState( { style: 'genre-list-no-trasform' })
+     } else {
+  
+      this.setState( { style: 'genre-list' })
+     }
   }
   
+  componentDidUpdate(prev) {
+    if (this.props.dropDownMovie.genreId !== prev.dropDownMovie.genreId) {
+        this.handleCarouselStyle()
+    }
+  }
+
   onMouseEnterLinkArrow() {
     this.setState( {linkArrow: <i class="fas fa-chevron-right"></i>})
   }
@@ -155,7 +173,7 @@ class GenreIndexItem extends React.Component {
             {this.isLiknedGenre()}
             {leftArrow}
           <ul 
-          className='genre-list'>
+          className={this.state.style}>
             {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}

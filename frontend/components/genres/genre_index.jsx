@@ -1,5 +1,5 @@
 import React from 'react';
-import GenreIndexItem from './genre_index_item';
+import GenreIndexItem from './genre_index_item_container';
 import MyListContainer from './my_list_container'
 import GenreMovieDisplayContainer from './movies/genre_movie_display_container';
 import SearchResultContainer from './search_result_container';

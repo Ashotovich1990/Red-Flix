@@ -395,6 +395,43 @@ img {
 
 }
 
+.genre-list-no-trasform {
+    margin-top: -15px; 
+    display: flex;
+    max-width: 100%;
+    margin-left: 2%;
+
+    // &:hover {
+    //     .li {
+    //         transform:
+    //     translateX(-25%);
+    //     z-index: 5;
+    //     position: relative;
+    //     }
+    // }
+    
+    // li:hover ~ li {
+    //     transform: translateX(25%);
+    // }
+
+    li {
+        margin-right: 9px;
+        // transition: transform 300ms ease 100ms; 
+        // &:after {
+        //     content: "";
+        //     display: block;
+        // } 
+
+        // &:hover {
+        //     transform: scale(1.5);
+        // }
+    }
+
+    .movie-list-item-content:hover > #movie-title, #movie-year, #movie-rating, .movie-dropbar {
+        transform: none;
+    }
+}
+
 .my-genre-list {
     display: flex;
     flex-wrap: wrap;
