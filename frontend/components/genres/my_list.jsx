@@ -5,12 +5,28 @@ import MovieDropbarContainer from './movies/movie_list_dropbar_container';
 class MyList extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {hovered: null, browse: null, start: 0, end: 6}
+        this.state = {hovered: null, browse: null, start: 0, end: 6, style: 'my-genre-list'}
         this.onMouseEnterHandle = this.onMouseEnterHandle.bind(this)
         this.onMouseLeaveHandle = this.onMouseLeaveHandle.bind(this)
         this.handleScrollRight = this.handleScrollRight.bind(this);
         this.handleScrollLeft = this.handleScrollLeft.bind(this);
+        this.handleCarouselStyle = this.handleCarouselStyle.bind(this);
     }
+
+    handleCarouselStyle() {   
+      if (this.props.dropDownMovie.movieId) {
+        this.setState( { style: 'my-genre-list-no-trasform' })
+      } else {
+        this.setState( { style: 'my-genre-list' })
+      }
+   }
+
+   componentDidUpdate(prev) {
+
+    if (this.props.dropDownMovie.movieId !== prev.dropDownMovie.movieId) {
+        this.handleCarouselStyle()
+    }
+  }
 
     onMouseEnterHandle(movie_id) {
         return (e) => {
@@ -53,7 +69,7 @@ class MyList extends React.Component {
         <div className='my-list'>
             {myListMessage}
             {/* <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div> */}
-          <ul className='my-genre-list'>
+          <ul className={this.state.style}>
             {this.props.movies.slice(this.state.start,this.props.movies.length).map(movie => (<li key={movie.id}
             onMouseEnter={this.onMouseEnterHandle(movie.id)}
             onMouseLeave={this.onMouseLeaveHandle}

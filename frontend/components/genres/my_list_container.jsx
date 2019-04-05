@@ -7,7 +7,7 @@ const mSP = (state) => {
         state.entities.movies[movieId]
     ));
     
-    return { movies }
+    return { movies, dropDownMovie: state.dropDownMovie}
 };
 
 export default withRouter(connect(mSP,null)(MyList));
