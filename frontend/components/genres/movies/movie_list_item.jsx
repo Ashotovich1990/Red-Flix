@@ -43,7 +43,7 @@ class MovieListItem extends React.Component {
         if (this.state.redirect) {
             const genreUrl = this.props.pageGenreId ? this.props.pageGenreId : "main";
             return <Redirect to={`/browse/${genreUrl}/watch/${this.props.content.id}`}/>    
-        } else if (this.props.hovered === this.props.content.id || this.props.dropDownMovie.movieId === this.props.content.id) {
+        } else if (this.props.hovered === this.props.content.id || (this.props.dropDownMovie.movieId === this.props.content.id && this.props.dropDownMovie.genreId === this.props.genreId )) {
         return  (
         <div onMouseEnter={this.changeDropDownMovie}>
             <div  style={this.style}>
