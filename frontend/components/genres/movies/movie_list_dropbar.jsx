@@ -51,15 +51,6 @@ class MovieDropbar extends React.Component {
         };
     }
 
-    // renderButton() {
-    //     if (this.props.isOnList) {
-    //         return <div className='remove-movie-button' onClick={this.handleRemove}>Remove</div>
-    //     } else {
-    //         return <div className='add-movie-button' onClick={this.handleAdd}>Add</div>
-    //     }
-    // }
-    
-   
     genres(movieId) {
         let names = []; 
         Object.keys(this.props.genreNames).forEach(key => {
@@ -144,9 +135,6 @@ class MovieDropbar extends React.Component {
                         Your browser does not support the video tag.
                     </video>
                     {this.soundControl()}
-                    {/* <div>
-                        <div id='dropdown-close' onClick={this.handleClose}><i className="fas fa-times"></i></div>
-                    </div> */}
               </div>
             )
         } else {
