@@ -40,7 +40,7 @@ class SearchResult extends React.Component {
         <div className="search-empty-results">No matches Found</div>
         : 
         <div>
-           <SearchListContainer movies={this.state.movies} search={true} />
+           <SearchListContainer dropDownMovie={this.props.dropDownMovie} movies={this.state.movies} search={true} />
         </div>)
 
     }

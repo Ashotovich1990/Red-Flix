@@ -11,6 +11,7 @@ const mSP = (state) => {
     searchItem: state.search.item,
     genreLists: state.entities.genreLists,
     genreNames: state.entities.genreNames,
+    dropDownMovie: state.dropDownMovie,
 }};
 
 
