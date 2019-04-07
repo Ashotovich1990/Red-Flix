@@ -8,6 +8,7 @@ const mSP = (state, ownProps) => ({
     movies: state.entities.movies,
     pageGenreId: ownProps.match.params.genreId,
     myList: state.entities.myList,
+    genreNames: state.entities.genreNames,
 })
 
 const mDP = dispatch => ({

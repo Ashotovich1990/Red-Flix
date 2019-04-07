@@ -54,7 +54,13 @@ document.addEventListener('DOMContentLoaded', ()=> {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     const root = document.getElementById('root');
-    ReactDOM.render(<Root store={store} />, root)
-    console.log(document.getElementById("main-logo"));
-    document.getElementById("main-logo").click()
+    ReactDOM.render(<Root store={store} />, root);
+
+    function changeNavStyle () {
+        const nav = document.querySelector(".welcome-new");
+        this.scrollY <= 50 ? nav.style.background = "transparent" : nav.style.background = "rgb(20, 20, 20)";
+      }
+      
+    window.addEventListener("scroll", changeNavStyle, false);
+
 })

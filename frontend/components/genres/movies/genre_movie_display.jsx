@@ -54,6 +54,7 @@ class GenreMoviePlay extends React.Component {
     builtMovieBox() {
         return (
             <div className="genre-movie-box">
+               <h1 id="main-genre-name">{this.props.genreNames[this.props.pageGenreId]}</h1>
                <h1><p id ="Redflix-text">RedFlix</p><p>selection</p></h1>
                <h2>{this.state.movie.title}</h2>
                <div className="genre-button-container">

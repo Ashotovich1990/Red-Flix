@@ -1,12 +1,15 @@
 .welcome-new {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 6;
+    z-index: 2000;
+    transition: background-color ease 2s;
+    padding-bottom: 15px;
+    padding-top: 15px;
 }
 
 .welcome-user {
@@ -24,11 +27,12 @@
 
 .genre-nav-bar {
     display: flex;
-    // flex-direction: row;
     align-items: flex-end;
-    justify-content: flex-start;
+    font-size: 20px;
+    justify-content: space-evenly;
     min-width: 450px;
     margin-right: 5px;
+    font-weight: 200;
     
     a {
         text-decoration: none;
@@ -58,11 +62,11 @@
 
 #main-logo {
     display: inline-block;
-    margin-top: 2%;
     margin-left: 3%;
     color: #e50914;
     font-weight: 900;
-    font-size: 50px;
+    font-size: 40px;
+    margin-right: 30px;
 }
 
 .signout-button {
@@ -74,7 +78,6 @@
     font-size: 16px;
     text-decoration: none;
     border-radius: 3px;
-    padding: 7px 17px;
     min-width: 100px;
     max-width: 120px;
     border: none;
@@ -103,7 +106,7 @@
     display: inline-block;
     background-color: #e50914;
     color: white;
-    font-size: 22px;
+    font-size: 18px;
     text-decoration: none;
     border-radius: 3px;
     padding: 7px 17px;

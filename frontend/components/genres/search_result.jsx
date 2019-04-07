@@ -5,23 +5,23 @@ class SearchResult extends React.Component {
     constructor(props) {
         super(props);
         this.state = {moviesEmpty: true};
-        this.getResults = this.getResults.bind(this);
+        // this.getResults = this.getResults.bind(this);
     }
    
-    componentDidMount() {
-        this.getResults();
-    }
+    // componentDidMount() {
+    //     this.getResults();
+    // }
 
-    componentDidUpdate(prev) {
-      this.getResults(prev);
+    // componentDidUpdate(prev) {
+    //   this.getResults(prev);
         
-    }
+    // }
 
-    getResults(prev) {
-       if (!prev || this.props.searchItem !== prev.searchItem) {
-           this.setState({moviesEmpty: false});
-       }
-    }
+    // getResults(prev) {
+    //    if (!prev || this.props.searchItem !== prev.searchItem) {
+    //        this.setState({moviesEmpty: false});
+    //    }
+    // }
 
     // getResults(prev) {
     //     if (!prev || this.props.searchItem !== prev.searchItem) {
@@ -42,7 +42,7 @@ class SearchResult extends React.Component {
     render() {
 
         return (
-        this.state.moviesEmpty ? 
+        !this.props.movies.length ? 
         <div className="search-empty-results">No matches Found</div>
         : 
         <div>
