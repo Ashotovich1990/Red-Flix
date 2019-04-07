@@ -252,14 +252,15 @@ img {
 }
 
 #main-genre-name {
-    top: -125px;
+    top: -110px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 30px;
 }
 
 .genre-movie-box {
     position: absolute;
-    margin-top: 300px;
+    margin-top: 250px;
     margin-left: 7%;
     z-index: 100;
 
