@@ -4,7 +4,7 @@ import {fetchGenres, fetchGenre} from '../../actions/movies_actions';
 import {receiveDropDownMovie, receiveMainMovie} from '../../actions/display_actions';
 import {withRouter} from 'react-router-dom';
 
-const mSP = (state,ownProps) => ({
+const mSP = (state,ownProps) => ({ 
     genreId: ownProps.match.params.genreId,
     myList: state.entities.myList,
     mainMovie: state.mainMovie,

@@ -19,9 +19,7 @@ const userWatchlistsReducer = (oldState ={'0': []}, action) => {
           return newState;
         case REMOVE_MOVIE:
           newState = merge({}, oldState);
-         
           newState[0] = deleteItem(newState[0], action.movieId);
-   
           return newState;
         default:
           return oldState;

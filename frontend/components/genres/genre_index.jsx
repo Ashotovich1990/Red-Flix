@@ -8,8 +8,8 @@ import Footer from './footer';
 
 class GenreIndex extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = {movieToDisplay: '1'}
+        super(props);
+        this.state = {movieToDisplay: '1', movies: []};
     }
 
     componentDidMount() {
@@ -18,16 +18,23 @@ class GenreIndex extends React.Component {
         } else {
           this.props.fetchGenres()
         }
-     
-            window.scrollTo(0, 0)
-         
+        window.scrollTo(0, 0)   
     }
 
     componentDidUpdate(prev) {
         if (this.props.genreId && this.props.genreId !== prev.genreId) {
-             window.scrollTo(0, 0)
+            window.scrollTo(0, 0)
+        }
+
+        if (!this.props.search.item && this.props.search.item !== prev.search.item) {
+            if (this.props.genreId) {
+                this.props.fetchGenre(this.props.genreId)
+              } else {
+                this.props.fetchGenres()
+            }
         }
     }
+
 
     componentWillUnmount() {
         // this.myRef.current.scrollTo(0, 0);
@@ -40,7 +47,7 @@ class GenreIndex extends React.Component {
     }
 
     render() {
-
+    
         if (this.props.search.item) {
             return ( <div>
                 <SearchResultContainer />

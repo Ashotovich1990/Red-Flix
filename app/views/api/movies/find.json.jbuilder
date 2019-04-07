@@ -14,4 +14,3 @@ json.movies do
         end
     end
 end
-

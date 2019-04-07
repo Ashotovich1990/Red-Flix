@@ -18,14 +18,18 @@ class Welcome extends React.Component {
 
     handleChange(e) {
       setTimeout(() => this.props.receiveSearchItem(this.state.phrase), 2)
-      this.setState({phrase: e.target.value});
+      this.setState({phrase: e.target.value}, () => {
+        if (this.state.phrase) {
+          this.props.findMovies(this.state.phrase)
+        } 
+      });
     } 
 
     handleSearchBox() {
       if (!this.state.searchBoxOpen) {
           this.setState( {searchBoxOpen: true})
       } else {
-        this.setState( {searchBoxOpen: false, phrase: ""}, () => this.props.receiveSearchItem())
+          this.setState( {searchBoxOpen: false, phrase: ""}, () => this.props.receiveSearchItem(""))
       }
     }
 

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     window.fetchGenre = MovieApiUtil.fetchGenre; 
     window.addMovie = MovieApiUtil.addMovie;
     window.removeMovie = MovieApiUtil.removeMovie;
+    window.findMovies = MovieApiUtil.findMovies;
     
     // test
     

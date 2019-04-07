@@ -3,6 +3,7 @@ import {
     RECEIVE_MOVIE,
     ADD_TO_WATCHLIST,
 } from '../actions/movies_actions';
+// import {RESET_SEARCH_ITEM } from '../actions/search_actions';
 import {merge} from 'lodash';
 
 const moviesReducer = (oldState = {}, action) => {

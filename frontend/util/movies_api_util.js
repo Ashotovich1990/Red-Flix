@@ -46,3 +46,15 @@ export const removeMovie = movieId => {
     )
 }
 
+export const findMovies = term => {
+    return (
+        $.ajax({
+            url: `/api/genres/333`,
+            method: 'GET',
+            data: {
+                movie: { term }
+            }
+        })
+    )
+}
+

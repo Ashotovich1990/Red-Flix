@@ -1,4 +1,4 @@
-import * as MovieApiUtil from '../util/movies_api_util'
+import * as MovieApiUtil from '../util/movies_api_util';
 import {receiveMainMovie} from './display_actions';
 
 export const RECEIVE_MOVIES = "RECEIVE_MOVIES";
@@ -29,6 +29,11 @@ const deleteMovie = movieId => ({
     type: REMOVE_MOVIE,
     movieId,
 });
+
+export const findMovies = (term) => dispatch => {
+    MovieApiUtil.findMovies(term)
+    .then(res => dispatch(receiveMovies(res)))
+}
 
 export const fetchGenres = () => dispatch => (
     MovieApiUtil.fetchGenres()

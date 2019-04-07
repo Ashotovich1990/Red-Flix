@@ -28,7 +28,11 @@ class Api::GenresController < ApplicationController
     end
 
     def show 
-        @movies = Movie.with_attached_photo.with_attached_video.joins(:genres).where(genres: {id: params[:id]})
+        unless movie_params && movie_params[:term]
+            @movies = Movie.with_attached_photo.with_attached_video.joins(:genres).where(genres: {id: params[:id]})
+        else 
+            @movies = Movie.with_attached_photo.with_attached_video.where("title LIKE ?", "%#{movie_params[:term]}%").all 
+        end
         @genre_lists = Hash.new
         @genre_names = Hash.new
         @my_watchlist = Hash.new
@@ -51,6 +55,12 @@ class Api::GenresController < ApplicationController
         end
         
         render :show
+    end
+
+    private 
+
+    def movie_params 
+      params.require(:movie).permit(:term) if params[:movie]
     end
  
 end
