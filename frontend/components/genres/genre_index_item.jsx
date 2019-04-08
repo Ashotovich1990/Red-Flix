@@ -38,7 +38,7 @@ class GenreIndexItem extends React.Component {
   }
 
   onMouseEnterLinkArrow() {
-    this.setState( {linkArrow: <i class="fas fa-chevron-right"></i>})
+    this.setState( {linkArrow: <i className="fas fa-chevron-right"></i>})
   }
   
   onMouseLeaveLinkArrow() {
@@ -56,7 +56,7 @@ class GenreIndexItem extends React.Component {
   }
 
   onMouseEnterBrowse() {
-    this.setState( {linkArrow: <i class="fas fa-chevron-right"></i>})
+    this.setState( {linkArrow: <i className="fas fa-chevron-right"></i>})
     let str;
     if (this.props.genreId === '0') {
       str = 'open my list'
