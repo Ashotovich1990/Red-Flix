@@ -121,7 +121,8 @@ class MovieDropbar extends React.Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to={`/browse/watch/${this.props.dropDownMovie.movieId}`}/>
+            const genreUrl = this.props.pageGenreId ? this.props.pageGenreId : "main";
+            return <Redirect to={`/browse/${genreUrl}/watch/${this.props.dropDownMovie.movieId}`}/>
         }
 
           const movie = this.props.movies[this.props.dropDownMovie.movieId]
