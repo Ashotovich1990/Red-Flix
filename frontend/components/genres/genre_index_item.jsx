@@ -24,14 +24,11 @@ class GenreIndexItem extends React.Component {
   }
 
   handleCarouselStyle() {
-    
-     if (this.props.dropDownMovie.genreId === this.props.genreId) {
- 
-        this.setState( { style: 'genre-list-no-trasform' })
-     } else {
-  
+    if (this.props.dropDownMovie.genreId === this.props.genreId) {
+      this.setState( { style: 'genre-list-no-trasform' })
+    } else {
       this.setState( { style: 'genre-list' })
-     }
+    }
   }
   
   componentDidUpdate(prev) {

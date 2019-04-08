@@ -27,10 +27,6 @@ class Api::MoviesController < ApplicationController
         movieListItem ? movieListItem.destroy_all : nil
     end
 
-    # def index
-    #     @movies = Movie.with_attached_photo.with_attached_video.where("title LIKE ?", "%#{movie_params[:term]}%").all
-    # end
-    
     private 
 
     def movie_params 
