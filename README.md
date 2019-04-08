@@ -136,21 +136,140 @@ end
 
 ### Routes and controllers 
 * Following routes are established to manage MVC model. 
-![Image description](app/assets/images/routes.png). 
+``` ruby
+  root to: "static_pages#root"
+
+  namespace :api, defaults: { format: :json} do
+    resources :users, only: [:create]
+    resource :session, only: [:create, :destroy]
+    resources :genres, only: [:index, :show] 
+    resources :movies, only: [:show, :create, :destroy]  
+  end
+```
 * User and Session controllers take care of signing up, logging in and logging out the user.
 * Genres controller is responsible for populating the browse page with movies. It uses INDEX method to get all the genres and sample movies that belong to that genre and SHOW method to get all the movies belonging the specific genre. Both methods use Active Records 'includes' and Active Storage 'with_attached' methods to enable eager loading and avoid n+1 db queries. 
-![Image description](app/assets/images/genres-controller.png)
+``` ruby
+def index 
+        @sample = Genre.includes(:sample_movies)
+        @genre_lists = Hash.new 
+        @genre_names = Hash.new
+        @my_watchlist = Hash.new
+        @movies = []
+
+        @sample.each do |genre|
+            if genre.sample_movie_ids[0] 
+            @genre_names[genre.id] = genre.name
+                @genre_lists[genre.id] = genre.sample_movie_ids
+                @movies += genre.sample_movies.with_attached_photo.with_attached_video
+            end
+        end
+    
+        @my_watchlist[0] = current_user.movie_ids
+        if (@my_watchlist[0].size >= 1)
+            
+            @movies += Movie.with_attached_photo.with_attached_video.joins(:users).where(users: {id: current_user.id})
+            @genre_names[0] = Genre.first.name
+            @genre_lists[0] = @my_watchlist[0]
+        end
+     
+        render :index
+    end
+
+    def show 
+        unless movie_params && movie_params[:term]
+            @movies = Movie.with_attached_photo.with_attached_video.joins(:genres).where(genres: {id: params[:id]})
+        else 
+            @movies = Movie.with_attached_photo.with_attached_video.where("title LIKE ?", "%#{movie_params[:term]}%").all 
+        end
+        @genre_lists = Hash.new
+        @genre_names = Hash.new
+        @my_watchlist = Hash.new
+        
+        @movie_ids = @movies.map {|el| el.id}
+        if @movies
+          @sample = MovieList.includes(:genre).where( movie_id: @movie_ids)
+          @sample.each do |movie_list|
+            @genre_names[movie_list.genre.id] = movie_list.genre.name
+            @genre_lists[movie_list.genre.id] ||= []
+            @genre_lists[movie_list.genre.id] += [movie_list.movie_id]
+          end
+        end
+
+        @my_watchlist[0] = current_user.movie_ids
+        if !@my_watchlist.empty?
+            @movies += Movie.with_attached_photo.with_attached_video.joins(:users).where(users: {id: current_user.id}) 
+            @genre_names[0] = Genre.first.name
+            @genre_lists[0] = @my_watchlist[0]
+        end
+        
+        render :show
+    end
+```
 * After fetching all the movies that belong to the specific genre SHOW method also gathers data on all the other genres that fetched movies also belong to, which lets sort movies of the given genre by other genres on the frontend level.
 * SHOW and INDEX method also gather the user watchlist movies under the genre indexed at zero.
 * Movies controller has CREATE and DELETE methods which add and remove movies from the user's watchlist, and SHOW method which is responsible for fetching the movie user is going to watch. 
-![Image description](app/assets/images/movies-controller.png)
+``` ruby
+class Api::MoviesController < ApplicationController
+    before_action :ensure_login
+    
+    def show 
+        @movie = Movie.find_by(id: params[:id])
+        render :show
+    end
+
+    def create 
+        user_id = current_user.id 
+      
+        movie_id = movie_params[:id]
+        
+        movieListItem = UserWatchlist.new(user_id: user_id, movie_id: movie_id)
+
+        if movieListItem.save 
+            @movie = movieListItem.movie
+            render :show
+        else 
+            nil
+        end
+    end
+
+
+    def destroy 
+        movieListItem = UserWatchlist.select('*').where(user_id: current_user.id, movie_id: params[:id])
+        movieListItem ? movieListItem.destroy_all : nil
+    end
+
+    private 
+
+    def movie_params 
+      params.require(:movie).permit(:id, :term)
+    end
+
+end
+```
 
 ### Redux state and logic 
 * The state consists of the follwing slices. 
-![Image description](app/assets/images/state.png)
+``` JavaScript
+const rootReducer = combineReducers({
+    session: sessionReducer,
+    entities: entitiesReducer,
+    errors: errorsReducer,
+    dropDownMovie: dropDownMovieReducer,
+    mainMovie: mainMovieReducer,
+    search: searchItemReducer,
+})
+```
 * Session slice handles user auth concerns. 
 * Entities slice translates the db structure onto the FrontEnd level. 
-![Image description](app/assets/images/entities.png)
+``` JavaScript
+const entitiesReducer = combineReducers({
+    users: usersReducer,
+    movies: moviesReducer,
+    genreLists: genreListsReducer,
+    genreNames: genreNamesReducer,
+    myList: userWatchlistsReducer,
+});
+```
 * Errors slice handles delivering session errors to the user. 
 * DropDownMovie slice handles logic nessecary to provide dropdown movie-window feature in the movie-list carousels. 
 ![Image description](app/assets/images/dropdown-movie.png)
@@ -159,7 +278,23 @@ end
 
 ### Frontend routes and structure
 * The app has the following main structure 
-![Image description](app/assets/images/app-structure.png)
+``` javascript 
+const App = () => (
+    <div>
+        <header id="main-header">
+            <WelcomeContainer />
+        </header>
+        <Switch>
+            <ProtectedRoute exact path="/browse/:genreId/watch/:movieId" component={MoviePlayContainer}/>
+            <ProtectedRoute exact path="/browse/:genreId" component={GenreIndexContainer}/>
+            <ProtectedRoute exact path="/browse" component={GenreIndexContainer}/>
+            <AuthRoute exact path="/signup" component={SignupFormContainer} />
+            <AuthRoute exact path="/login" component={LoginFormContainer} />
+            <AuthRoute exact patch="/" component={WelcomeOffer}/>
+        </Switch>    
+    </div>
+)
+```
 * Protected and Auth routes are utilized to control users access to the app's components. 
 * MoviePlayContainer plays the movie according to the :moveId param in the frontend route. 
 ![Image description](app/assets/images/movie-display.png)
@@ -171,11 +306,55 @@ end
 ### Some of React components 
 * The app heavily relies on React to create an engaging and interactive frontend. 
 * The main components are broken down into smaller ones. Like GenreIndexContainer includes GenreIndexItems,  which in their turn include MovieListItems.
-![Image description](app/assets/images/genre-index-item.png)
+``` javascript 
+import React from 'react';
+import MovieListItemContainer from './movies/movie_list_item_container';
+import {Link} from 'react-router-dom';
+import MovieDropbarContainer from './movies/movie_list_dropbar_container';
+
+
+class GenreIndexItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {hovered: null, browse: "", start: 0, end: 6, showArrowLeft: false, showArrowRight: false, linkArrow: <div></div>, style: 'genre-list'}
+    this.onMouseEnterHandle = this.onMouseEnterHandle.bind(this)
+    this.onMouseLeaveHandle = this.onMouseLeaveHandle.bind(this)
+    ...
+  }
+
+  handleCarouselStyle() {
+    if (this.props.dropDownMovie.genreId === this.props.genreId) {
+      this.setState( { style: 'genre-list-no-trasform' })
+    } else {
+      this.setState( { style: 'genre-list' })
+    }
+  }
+  
+  ...
+}
+```
 *  Those lists represent movies of the specific genre organized in a carousel style. 
 ![Image description](app/assets/images/carousel.png).
 * Background posters for each movie are extracted from Active Storage, passed down the props and used for styling directly from inside the React Component.
-![Image description](app/assets/images/background-photo-style.png).
+``` javascript 
+class MovieListItem extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {redirect: false}
+        this.style = {
+            width: '200px',
+            height: "280px",
+            backgroundImage: "url(" + this.props.content.poster + ")",
+            backgroundSize: 'cover',
+            alignItems: 'stretch',
+        }
+        this.handleClick = this.handleClick.bind(this);
+        this.scrollToItem = this.scrollToItem.bind(this);
+        this.handlePlay = this.handlePlay.bind(this);
+        this.changeDropDownMovie = this.changeDropDownMovie.bind(this);
+    }
+}
+```
 
 # Pages 
 * Landing
