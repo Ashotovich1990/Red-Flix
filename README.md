@@ -37,6 +37,22 @@ This project was built in two weeks, although I plan to improve it further more 
 ###  Organizing data
 
 * Movies and Genres are connected by movie-lists joins table.
+``` ruby 
+class MovieList < ApplicationRecord
+    validates :movie_id, :genre_id, presence: true
+    validates_uniqueness_of :genre_id, scope: [:movie_id]
+
+    belongs_to :movie,
+    primary_key: :id,
+    foreign_key: :movie_id,
+    class_name: :Movie
+
+    belongs_to :genre,
+    primary_key: :id, 
+    foreign_key: :genre_id,
+    class_name: :Genre
+end
+```
 ![Image description](app/assets/images/movie-lists.png)
 * Acitve Records assosiations are establish to enable fetching all the movies belonging to the specific genre and all the genres belonging to the specific movie.
 ![Image description](app/assets/images/movie-assosiations.png)
