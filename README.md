@@ -53,15 +53,85 @@ class MovieList < ApplicationRecord
     class_name: :Genre
 end
 ```
-![Image description](app/assets/images/movie-lists.png)
 * Acitve Records assosiations are establish to enable fetching all the movies belonging to the specific genre and all the genres belonging to the specific movie.
-![Image description](app/assets/images/movie-assosiations.png)
+``` ruby 
+class Movie < ApplicationRecord
+    validates :title, presence: true, uniqueness: true
+    validates :description, :year, :maturity_rating, presence: true
+    
+    has_many :watchlist_items,
+    primary_key: :id,
+    foreign_key: :movie_id,
+    class_name: :UserWatchlist
+
+    has_many :users,
+    through: :watchlist_items,
+    source: :user
+
+    has_many :movie_lists,
+    primary_key: :id, 
+    foreign_key: :movie_id,
+    class_name: :MovieList
+
+    has_many :genres,
+    through: :movie_lists,
+    source: :genre
+end
+```
 * Movie-lists table has sample-movie boolean column which is designed to avoid fetching every movie in the database when populating the main page with genres. 
-![Image description](app/assets/images/sample-movies.png).
+``` ruby 
+class Genre < ApplicationRecord
+    validates :name, presence: true, uniqueness: true
+
+    has_many :movie_lists,
+    primary_key: :id,
+    foreign_key: :genre_id,
+    class_name: :MovieList
+
+    has_many :sample_movie_lists, -> {where sample: true},
+    class_name: :MovieList
+
+    has_many :sample_movies,
+    through: :sample_movie_lists,
+    source: :movie
+
+    has_many :movies,
+    through: :movie_lists,
+    source: :movie
+end
+```
 * Active Storage is used to store movie posters and videos. Active Storage assosiactions are defined in a way to enable eager loading in the conrtollers. 
-![Image description](app/assets/images/active-storage.png).
+``` ruby 
+class Movie < ApplicationRecord
+  has_one_attached :photo 
+
+    scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
+    scope :with_preloaded_photo, -> { preload(photo_attachment: :blob) }
+
+    has_one_attached :video
+
+    scope :with_eager_loaded_video, -> { eager_load(video_attachment: :blob) }
+    scope :with_preloaded_video, -> { preload(video_attachment: :blob) }
+end
+```
 * My Lists is handled in a special way. It is set in the Genre table under index 0, only it gets its movies from user-watchlists joins table every time there is a need to extract 'my-list' for a given user (and not from the movie-lists). This solution was chosen to make it possible to deal with my-list on the frontend level as another genre.
-![Image description](app/assets/images/user-watchlist.png). 
+``` ruby
+class UserWatchlist < ApplicationRecord
+    validates_uniqueness_of :user_id, scope: [:movie_id]
+    validates :user_id, :movie_id, presence: true  
+
+    belongs_to :user,
+    primary_key: :id,
+    foreign_key: :user_id, 
+    class_name: :User
+    
+    belongs_to :movie, 
+    primary_key: :id,
+    foreign_key: :movie_id,
+    class_name: :Movie
+
+end
+```
 * Additionally actors and castings tables are established with according Acrtive Record assosiactions to add movie cast feature to movies (this part is realized only on the backend level due to the time constraints). 
 
 ### Routes and controllers 
