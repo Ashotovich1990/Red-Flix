@@ -70,10 +70,10 @@ class GenreMoviePlay extends React.Component {
         let icon;
         let func;
         if (this.props.myList[0].includes(this.state.movie.id)) {
-            icon = <i class="fas fa-check"></i>;
+            icon = <i className="fas fa-check"></i>;
             func = this.handleRemove;
         } else {
-            icon = <i class="fas fa-plus"></i>;
+            icon = <i className="fas fa-plus"></i>;
             func = this.handleAdd;
         }
         return <div className='genre-movie-button' onClick={func}><div>{icon} My List</div></div>
@@ -82,9 +82,9 @@ class GenreMoviePlay extends React.Component {
     soundControl() {
         let soundButton;
         if (this.state.muted) {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOn}><div><i class="fas fa-volume-mute"></i></div></div>
+            soundButton = <div className="sound-control" onClick={this.handleSoundOn}><div><i className="fas fa-volume-mute"></i></div></div>
         } else {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOff}><div><i class="fas fa-volume-up"></i></div></div>
+            soundButton = <div className="sound-control" onClick={this.handleSoundOff}><div><i className="fas fa-volume-up"></i></div></div>
         }
         return (
             <div className='sound-rating-container'>
