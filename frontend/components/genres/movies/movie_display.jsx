@@ -48,7 +48,7 @@ handleClick() {
             onMouseEnter={this.handleMouseEnter} 
             onMouseLeave={this.handleMouseLeave}>
             <i class="fas fa-arrow-left"></i> {this.state.msg}</span>
-            <video className="movie-list-movie-play" controls>
+            <video className="movie-list-movie-play" controls autoPlay="true">
             <source src={this.props.movies[this.props.movieId || this.props.genreMovieId].video} type="video/mp4"/>
           
             Your browser does not support the video tag.
