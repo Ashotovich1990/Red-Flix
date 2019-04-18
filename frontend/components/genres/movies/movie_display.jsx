@@ -21,14 +21,14 @@ handleMouseEnter() {
             }, time)
         }
     }
-    this.setState({ goBackStyle: "go-back-big"});
+    this.setState({ goBackStyle: "go-back-big cursor"});
 }
 
 handleMouseLeave() {
     if (this.state.msg === " Go Back") {
         this.setState( {msg: "" });
       }
-   this.setState({goBackStyle: "go-back" });
+   this.setState({goBackStyle: "go-back cursor" });
 }
   
 handleClick() {

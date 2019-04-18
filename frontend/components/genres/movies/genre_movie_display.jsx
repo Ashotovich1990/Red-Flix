@@ -82,9 +82,9 @@ class GenreMoviePlay extends React.Component {
     soundControl() {
         let soundButton;
         if (this.state.muted) {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOn}><div><i className="fas fa-volume-mute"></i></div></div>
+            soundButton = <div className="sound-control cursor" onClick={this.handleSoundOn}><div><i className="fas fa-volume-mute"></i></div></div>
         } else {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOff}><div><i className="fas fa-volume-up"></i></div></div>
+            soundButton = <div className="sound-control cursor" onClick={this.handleSoundOff}><div><i className="fas fa-volume-up"></i></div></div>
         }
         return (
             <div className='sound-rating-container'>

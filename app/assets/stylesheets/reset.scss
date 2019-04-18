@@ -25,6 +25,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	input[type=submit] {
+		cursor: pointer;
+	}
 }
 ol, ul {
 	list-style: none;

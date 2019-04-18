@@ -155,8 +155,8 @@ class GenreIndexItem extends React.Component {
     
     const genreType = this.props.genreUrl === '0' ? "my-list" : "genre";
 
-    const leftArrow = this.state.showArrowLeft ? <div onClick={this.handleScrollLeft} className='move-arrow-left'><i className="fas fa-arrow-left"></i></div > : <div className="empty-left-arrow"><i className="fas fa-arrow-left"></i></div>;
-    const rightArrow = this.state.showArrowRight ? <div onClick={this.handleScrollRight} className='move-arrow-right'><i className="fas fa-arrow-right"></i></div> : <div className="empty-rigth-arrow"><i className="fas fa-arrow-right"></i></div>;
+    const leftArrow = this.state.showArrowLeft ? <div onClick={this.handleScrollLeft} className='move-arrow-left cursor'><i className="fas fa-arrow-left"></i></div > : <div className="empty-left-arrow"><i className="fas fa-arrow-left"></i></div>;
+    const rightArrow = this.state.showArrowRight ? <div onClick={this.handleScrollRight} className='move-arrow-right cursor'><i className="fas fa-arrow-right"></i></div> : <div className="empty-rigth-arrow"><i className="fas fa-arrow-right"></i></div>;
 
     return (
       <div className={genreType}

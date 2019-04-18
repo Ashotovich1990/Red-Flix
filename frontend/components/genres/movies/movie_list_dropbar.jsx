@@ -106,13 +106,13 @@ class MovieDropbar extends React.Component {
     soundControl() {
         let soundButton;
         if (this.state.muted) {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOn}><div><i class="fas fa-volume-mute"></i></div></div>
+            soundButton = <div className="sound-control cursor" onClick={this.handleSoundOn}><div><i class="fas fa-volume-mute"></i></div></div>
         } else {
-            soundButton = <div className="sound-control" onClick={this.handleSoundOff}><div><i class="fas fa-volume-up"></i></div></div>
+            soundButton = <div className="sound-control cursor" onClick={this.handleSoundOff}><div><i class="fas fa-volume-up"></i></div></div>
         }
         return (
             <div className='close-sound-container'>
-                <div id='dropdown-close' onClick={this.handleClose}><i className="fas fa-times"></i></div>
+                <div className = "cursor" id='dropdown-close' onClick={this.handleClose}><i className="fas fa-times"></i></div>
                 {soundButton}
             </div>
         )

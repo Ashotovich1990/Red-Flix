@@ -52,9 +52,9 @@ class MovieListItem extends React.Component {
                   <div id={`maturity-rating-${this.props.content.maturity_rating}`}>{this.props.content.maturity_rating}</div>
                   <div id="movie-year">{this.props.content.year}</div>
                 </div>
-                <div onClick={this.handlePlay} id='open-movie-page'><i className="far fa-play-circle"></i></div>
+                <div onClick={this.handlePlay} className="cursor" id='open-movie-page'><i className="far fa-play-circle"></i></div>
                 <div  id="movie-title">{this.props.content.title}</div>
-                <div id="open-dropdown-movie" onClick={this.handleClick}><i className="fas fa-angle-double-down"></i></div>
+                <div className="cursor" id="open-dropdown-movie" onClick={this.handleClick}><i className="fas fa-angle-double-down"></i></div>
               </div>
             </div>
         </div>

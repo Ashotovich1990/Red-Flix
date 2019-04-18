@@ -43,7 +43,7 @@ class Welcome extends React.Component {
              <GenreNavContainer genres={this.props.genres}/>
            </div>
          <div className="welcome-user" >
-           <div onClick={this.handleSearchBox} className="search-icon">
+           <div onClick={this.handleSearchBox} className="search-icon cursor">
             <i className="fas fa-search"></i>
            </div>
            {searchBar}
