@@ -10,7 +10,7 @@ const mainMovieReducer = (oldState = '1', action) => {
     switch (action.type) {
         case RECEIVE_MAIN_MOVIE:
           newState = action.movieId;
-          return newState || null; 
+          return newState || "1"; 
         default:
           return oldState;
     }
